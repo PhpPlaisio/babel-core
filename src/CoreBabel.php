@@ -1,6 +1,6 @@
 <?php
 //----------------------------------------------------------------------------------------------------------------------
-namespace Nahouw\Abc;
+namespace SetBased\Abc\Babel;
 
 use SetBased\Abc\Abc;
 use SetBased\Abc\Babel\Babel;
@@ -28,7 +28,6 @@ class CoreBabel extends Babel
   private $lanIdStack = [];
 
   //--------------------------------------------------------------------------------------------------------------------
-
   /**
    * Object constructor.
    *
@@ -90,12 +89,12 @@ class CoreBabel extends Babel
         return Html::txt2Html($this->getTextFormatted($txtId, $args));
 
       case ($formatIsHtml===false and $argsAreHtml===true):
-        $text = Abc::$DL->bblTextGetText($txtId, $this->lanId);
+        $text = Abc::$DL->abcBabelTextGetText($txtId, $this->lanId);
 
         return vsprintf(Html::txt2Html($text['ttt_text']), $args);
 
       case ($formatIsHtml===true and $argsAreHtml===false):
-        $text = Abc::$DL->bblTextGetText($txtId, $this->lanId);
+        $text = Abc::$DL->abcBabelTextGetText($txtId, $this->lanId);
 
         $tmp = [];
         foreach ($args as $arg)
@@ -143,12 +142,12 @@ class CoreBabel extends Babel
         return Html::txt2Html($this->getTextReplaced($txtId, $replacePairs));
 
       case ($formatIsHtml===false and $argsAreHtml===true):
-        $text = Abc::$DL->bblTextGetText($txtId, $this->lanId);
+        $text = Abc::$DL->abcBabelTextGetText($txtId, $this->lanId);
 
         return strtr(Html::txt2Html($text['ttt_text']), $replacePairs);
 
       case ($formatIsHtml===true and $argsAreHtml===false):
-        $text = Abc::$DL->bblTextGetText($txtId, $this->lanId);
+        $text = Abc::$DL->abcBabelTextGetText($txtId, $this->lanId);
 
         $tmp = [];
         foreach ($replacePairs as $key => $value)
@@ -210,7 +209,7 @@ class CoreBabel extends Babel
    */
   public function getText($txtId, $args = null)
   {
-    $text = Abc::$DL->bblTextGetText($txtId, $this->lanId);
+    $text = Abc::$DL->abcBabelTextGetText($txtId, $this->lanId);
 
     if (empty($args))
     {
@@ -235,7 +234,7 @@ class CoreBabel extends Babel
    */
   public function getTextFormatted($txtId, $args)
   {
-    $text = Abc::$DL->bblTextGetText($txtId, $this->lanId);
+    $text = Abc::$DL->abcBabelTextGetText($txtId, $this->lanId);
 
     return vsprintf($text['ttt_text'], $args);
   }
@@ -255,7 +254,7 @@ class CoreBabel extends Babel
    */
   public function getTextReplaced($txtId, $replacePairs)
   {
-    $text = Abc::$DL->bblTextGetText($txtId, $this->lanId);
+    $text = Abc::$DL->abcBabelTextGetText($txtId, $this->lanId);
 
     return strtr($text['ttt_text'], $replacePairs);
   }
@@ -273,7 +272,7 @@ class CoreBabel extends Babel
    */
   public function getWord($wrdId)
   {
-    return Abc::$DL->bblWordGetWord($wrdId, $this->lanId);
+    return Abc::$DL->AbcBabelWordGetWord($wrdId, $this->lanId);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
