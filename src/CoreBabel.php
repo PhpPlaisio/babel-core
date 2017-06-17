@@ -91,7 +91,7 @@ class CoreBabel extends Babel
       case ($formatIsHtml===false and $argsAreHtml===true):
         $text = Abc::$DL->abcBabelTextGetText($txtId, $this->lanId);
 
-        return vsprintf(Html::txt2Html($text['ttt_text']), $args);
+        return vsprintf(Html::txt2Html($text), $args);
 
       case ($formatIsHtml===true and $argsAreHtml===false):
         $text = Abc::$DL->abcBabelTextGetText($txtId, $this->lanId);
@@ -102,7 +102,7 @@ class CoreBabel extends Babel
           $tmp[] = Html::txt2Html($arg);
         }
 
-        return vsprintf($text['ttt_text'], $tmp);
+        return vsprintf($text, $tmp);
 
       case ($formatIsHtml===true and $argsAreHtml===true):
         return $this->getTextFormatted($txtId, $args);
@@ -144,7 +144,7 @@ class CoreBabel extends Babel
       case ($formatIsHtml===false and $argsAreHtml===true):
         $text = Abc::$DL->abcBabelTextGetText($txtId, $this->lanId);
 
-        return strtr(Html::txt2Html($text['ttt_text']), $replacePairs);
+        return strtr(Html::txt2Html($text), $replacePairs);
 
       case ($formatIsHtml===true and $argsAreHtml===false):
         $text = Abc::$DL->abcBabelTextGetText($txtId, $this->lanId);
@@ -155,7 +155,7 @@ class CoreBabel extends Babel
           $tmp[$key] = Html::txt2Html($value);
         }
 
-        return strtr($text['ttt_text'], $tmp);
+        return strtr($text, $tmp);
 
       case ($formatIsHtml===true and $argsAreHtml===true):
         return $this->getTextReplaced($txtId, $replacePairs);
@@ -213,10 +213,10 @@ class CoreBabel extends Babel
 
     if (empty($args))
     {
-      return $text['ttt_text'];
+      return $text;
     }
 
-    return vsprintf($text['ttt_text'], $args);
+    return vsprintf($text, $args);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -236,7 +236,7 @@ class CoreBabel extends Babel
   {
     $text = Abc::$DL->abcBabelTextGetText($txtId, $this->lanId);
 
-    return vsprintf($text['ttt_text'], $args);
+    return vsprintf($text, $args);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -256,7 +256,7 @@ class CoreBabel extends Babel
   {
     $text = Abc::$DL->abcBabelTextGetText($txtId, $this->lanId);
 
-    return strtr($text['ttt_text'], $replacePairs);
+    return strtr($text, $replacePairs);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
