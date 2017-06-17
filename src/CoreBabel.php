@@ -178,7 +178,7 @@ class CoreBabel extends Babel
    */
   public function getHtmlWord($wrdId)
   {
-    return Html::txt2Html($this->getHtmlWord($wrdId));
+    return Html::txt2Html($this->getWord($wrdId));
   }
 
   //--------------------------------------------------------------------------------------------------------------------
