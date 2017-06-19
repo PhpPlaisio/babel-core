@@ -3,7 +3,6 @@
 namespace SetBased\Abc\Babel;
 
 use SetBased\Abc\Abc;
-use SetBased\Abc\Babel\Babel;
 use SetBased\Abc\Helper\Html;
 use SetBased\Exception\RuntimeException;
 
@@ -133,20 +132,20 @@ class CoreBabel extends Babel
    */
   public function getHtmlTextReplaced($txtId, $formatIsHtml, $valuesAreHtml, $replacePairs)
   {
-    $formatIsHtml = !empty($formatIsHtml);
-    $argsAreHtml  = !empty($argsAreHtml);
+    $formatIsHtml  = !empty($formatIsHtml);
+    $valuesAreHtml = !empty($valuesAreHtml);
 
     switch (true)
     {
-      case ($formatIsHtml===false and $argsAreHtml===false):
+      case ($formatIsHtml===false and $valuesAreHtml===false):
         return Html::txt2Html($this->getTextReplaced($txtId, $replacePairs));
 
-      case ($formatIsHtml===false and $argsAreHtml===true):
+      case ($formatIsHtml===false and $valuesAreHtml===true):
         $text = Abc::$DL->abcBabelTextGetText($txtId, $this->lanId);
 
         return strtr(Html::txt2Html($text), $replacePairs);
 
-      case ($formatIsHtml===true and $argsAreHtml===false):
+      case ($formatIsHtml===true and $valuesAreHtml===false):
         $text = Abc::$DL->abcBabelTextGetText($txtId, $this->lanId);
 
         $tmp = [];
@@ -157,7 +156,7 @@ class CoreBabel extends Babel
 
         return strtr($text, $tmp);
 
-      case ($formatIsHtml===true and $argsAreHtml===true):
+      case ($formatIsHtml===true and $valuesAreHtml===true):
         return $this->getTextReplaced($txtId, $replacePairs);
 
       default:
