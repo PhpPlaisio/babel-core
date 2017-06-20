@@ -84,15 +84,15 @@ class CoreBabel extends Babel
 
     switch (true)
     {
-      case ($formatIsHtml===false and $argsAreHtml===false):
+      case ($formatIsHtml===false && $argsAreHtml===false):
         return Html::txt2Html($this->getTextFormatted($txtId, $args));
 
-      case ($formatIsHtml===false and $argsAreHtml===true):
+      case ($formatIsHtml===false && $argsAreHtml===true):
         $text = Abc::$DL->abcBabelTextGetText($txtId, $this->lanId);
 
         return vsprintf(Html::txt2Html($text), $args);
 
-      case ($formatIsHtml===true and $argsAreHtml===false):
+      case ($formatIsHtml===true && $argsAreHtml===false):
         $text = Abc::$DL->abcBabelTextGetText($txtId, $this->lanId);
 
         $tmp = [];
@@ -103,7 +103,7 @@ class CoreBabel extends Babel
 
         return vsprintf($text, $tmp);
 
-      case ($formatIsHtml===true and $argsAreHtml===true):
+      case ($formatIsHtml===true && $argsAreHtml===true):
         return $this->getTextFormatted($txtId, $args);
 
       default:
@@ -137,15 +137,15 @@ class CoreBabel extends Babel
 
     switch (true)
     {
-      case ($formatIsHtml===false and $valuesAreHtml===false):
+      case ($formatIsHtml===false && $valuesAreHtml===false):
         return Html::txt2Html($this->getTextReplaced($txtId, $replacePairs));
 
-      case ($formatIsHtml===false and $valuesAreHtml===true):
+      case ($formatIsHtml===false && $valuesAreHtml===true):
         $text = Abc::$DL->abcBabelTextGetText($txtId, $this->lanId);
 
         return strtr(Html::txt2Html($text), $replacePairs);
 
-      case ($formatIsHtml===true and $valuesAreHtml===false):
+      case ($formatIsHtml===true && $valuesAreHtml===false):
         $text = Abc::$DL->abcBabelTextGetText($txtId, $this->lanId);
 
         $tmp = [];
@@ -156,7 +156,7 @@ class CoreBabel extends Babel
 
         return strtr($text, $tmp);
 
-      case ($formatIsHtml===true and $valuesAreHtml===true):
+      case ($formatIsHtml===true && $valuesAreHtml===true):
         return $this->getTextReplaced($txtId, $replacePairs);
 
       default:
@@ -271,7 +271,7 @@ class CoreBabel extends Babel
    */
   public function getWord($wrdId)
   {
-    return Abc::$DL->AbcBabelWordGetWord($wrdId, $this->lanId);
+    return Abc::$DL->abcBabelWordGetWord($wrdId, $this->lanId);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
