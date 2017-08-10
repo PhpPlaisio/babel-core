@@ -1,0 +1,18 @@
+/**
+ * Selects the details of a language.
+ *
+ * @param p_lan_id The ID of the language.
+ */
+create procedure abc_babel_language_get_details(in p_lan_id @bbl_language.lan_id%type@)
+reads sql data
+-- type: singleton0
+begin
+  select lan_id
+  ,      lan_code
+  ,      lan_dir
+  ,      lan_lang
+  ,      lan_locale
+  from   BBL_LANGUAGE
+  where  lan_id = p_lan_id
+  ;
+end

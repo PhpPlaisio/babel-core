@@ -3,7 +3,8 @@
 namespace SetBased\Abc\Babel\Test\Abc;
 
 use SetBased\Abc\Abc;
-use SetBased\Abc\Babel;
+use SetBased\Abc\Babel\CoreBabel;
+use SetBased\Abc\ErrorLogger\ErrorLogger;
 use SetBased\Exception\RuntimeException;
 
 /**
@@ -19,8 +20,10 @@ class Framework extends Abc
   {
     parent::__construct();
 
-    self::$babel = new Babel\CoreBabel(C::LAN_ID_EN);
+    self::$babel = new CoreBabel();
     self::$DL    = new DataLayer();
+
+    self::$babel->setLanguage(C::LAN_ID_EN);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -43,9 +46,20 @@ class Framework extends Abc
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
+   * Returns the error logger.
+   *
+   * @return ErrorLogger
+   */
+  public function getErrorLogger()
+  {
+    throw new RuntimeException('Not implemented');
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
    * {@inheritdoc}
    */
-  protected function getLoginUrl($url)
+  public function getLoginUrl($url)
   {
     throw new RuntimeException('Not implemented');
   }

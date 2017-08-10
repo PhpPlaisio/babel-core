@@ -13,33 +13,47 @@ class CoreBabel extends Babel
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * The ID of the (default) language.
-   *
-   * @var int
-   */
-  private $lanId;
-
-  /**
-   * The stack with language IDs.
+   * The details of the (default) language.
    *
    * @var array
    */
-  private $lanIdStack = [];
+  private $details;
+
+  /**
+   * The stack with language details.
+   *
+   * @var array[]
+   */
+  private $stack = [];
 
   //--------------------------------------------------------------------------------------------------------------------
+
   /**
-   * Object constructor.
+   * Returns the language code of the current default language.
    *
-   * @param int $lanId The ID of the default language.
+   * @return string
    *
    * @since 1.0.0
    * @api
    */
-  public function __construct($lanId)
+  public function getCode()
   {
-    parent::__construct();
+    return $this->details['lan_code'];
+  }
 
-    $this->lanId = $lanId;
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Returns the direction of the current default language. See [dir](https://www.w3schools.com/tags/att_global_dir.asp)
+   * attribute.
+   *
+   * @return string
+   *
+   * @since 1.0.0
+   * @api
+   */
+  public function getDir()
+  {
+    return $this->details['lan_dir'];
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -88,12 +102,12 @@ class CoreBabel extends Babel
         return Html::txt2Html($this->getTextFormatted($txtId, $args));
 
       case ($formatIsHtml===false && $argsAreHtml===true):
-        $text = Abc::$DL->abcBabelTextGetText($txtId, $this->lanId);
+        $text = Abc::$DL->abcBabelTextGetText($txtId, $this->details['lan_id']);
 
         return vsprintf(Html::txt2Html($text), $args);
 
       case ($formatIsHtml===true && $argsAreHtml===false):
-        $text = Abc::$DL->abcBabelTextGetText($txtId, $this->lanId);
+        $text = Abc::$DL->abcBabelTextGetText($txtId, $this->details['lan_id']);
 
         $tmp = [];
         foreach ($args as $arg)
@@ -141,12 +155,12 @@ class CoreBabel extends Babel
         return Html::txt2Html($this->getTextReplaced($txtId, $replacePairs));
 
       case ($formatIsHtml===false && $valuesAreHtml===true):
-        $text = Abc::$DL->abcBabelTextGetText($txtId, $this->lanId);
+        $text = Abc::$DL->abcBabelTextGetText($txtId, $this->details['lan_id']);
 
         return strtr(Html::txt2Html($text), $replacePairs);
 
       case ($formatIsHtml===true && $valuesAreHtml===false):
-        $text = Abc::$DL->abcBabelTextGetText($txtId, $this->lanId);
+        $text = Abc::$DL->abcBabelTextGetText($txtId, $this->details['lan_id']);
 
         $tmp = [];
         foreach ($replacePairs as $key => $value)
@@ -191,7 +205,22 @@ class CoreBabel extends Babel
    */
   public function getLanId()
   {
-    return $this->lanId;
+    return $this->details['lan_id'];
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Returns the ISO 639-1 language code of the current default language. See
+   * [lang](https://www.w3schools.com/tags/ref_language_codes.asp) attribute.
+   *
+   * @return string
+   *
+   * @since 1.0.0
+   * @api
+   */
+  public function getLang()
+  {
+    return $this->details['lan_lang'];
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -208,7 +237,7 @@ class CoreBabel extends Babel
    */
   public function getText($txtId, $args = null)
   {
-    $text = Abc::$DL->abcBabelTextGetText($txtId, $this->lanId);
+    $text = Abc::$DL->abcBabelTextGetText($txtId, $this->details['lan_id']);
 
     if (empty($args))
     {
@@ -233,7 +262,7 @@ class CoreBabel extends Babel
    */
   public function getTextFormatted($txtId, $args)
   {
-    $text = Abc::$DL->abcBabelTextGetText($txtId, $this->lanId);
+    $text = Abc::$DL->abcBabelTextGetText($txtId, $this->details['lan_id']);
 
     return vsprintf($text, $args);
   }
@@ -253,7 +282,7 @@ class CoreBabel extends Babel
    */
   public function getTextReplaced($txtId, $replacePairs)
   {
-    $text = Abc::$DL->abcBabelTextGetText($txtId, $this->lanId);
+    $text = Abc::$DL->abcBabelTextGetText($txtId, $this->details['lan_id']);
 
     return strtr($text, $replacePairs);
   }
@@ -271,7 +300,7 @@ class CoreBabel extends Babel
    */
   public function getWord($wrdId)
   {
-    return Abc::$DL->abcBabelWordGetWord($wrdId, $this->lanId);
+    return Abc::$DL->abcBabelWordGetWord($wrdId, $this->details['lan_id']);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -285,7 +314,8 @@ class CoreBabel extends Babel
    */
   public function popLanguage()
   {
-    $this->lanId = array_pop($this->lanIdStack);
+    array_pop($this->stack);
+    $this->details = $this->stack[count($this->stack) - 1];
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -301,9 +331,25 @@ class CoreBabel extends Babel
    */
   public function pushLanguage($lanId)
   {
-    array_push($this->lanIdStack, $this->lanId);
+    $this->details = Abc::$DL->abcBabelLanguageGetDetails($lanId);
+    array_push($this->stack, $this->details);
+  }
 
-    $this->lanId = $lanId;
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Replace the current default language with a new default language.
+   *
+   * @param int $lanId The ID of the new default language.
+   *
+   * @return void
+   *
+   * @since 1.0.0
+   * @api
+   */
+  public function setLanguage($lanId)
+  {
+    $this->details                                = Abc::$DL->abcBabelLanguageGetDetails($lanId);
+    $this->stack[max(0, count($this->stack) - 1)] = $this->details;
   }
 
   //--------------------------------------------------------------------------------------------------------------------
