@@ -5,7 +5,7 @@
  */
 create procedure abc_babel_language_get_details(in p_lan_id @bbl_language.lan_id%type@)
 reads sql data
--- type: singleton0
+-- type: row1
 begin
   select lan_id
   ,      lan_code
