@@ -1,10 +1,10 @@
 {
   "name": "setbased/abc-babel-core",
-  "description": "ABC Framework: Core Babel",
+  "description": "ABC-Framework: Core Babel",
   "keywords": [
     "ABC-Framework",
-    "babel",
-    "core"
+    "Babel",
+    "Core"
   ],
   "require": {
     "php": ">=7.0.0",
