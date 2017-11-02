@@ -90,6 +90,8 @@ class CoreBabelTest extends TestCase
   public function testLanguageStack()
   {
     self::assertEquals(C::LAN_ID_EN, Abc::$babel->getLanId());
+    self::assertEquals('ltr', Abc::$babel->getDir());
+    self::assertEquals('en', Abc::$babel->getCode());
 
     Abc::$babel->pushLanguage(C::LAN_ID_EN);
     self::assertEquals(C::LAN_ID_EN, Abc::$babel->getLanId(), 'Push 1');
@@ -102,12 +104,18 @@ class CoreBabelTest extends TestCase
 
     Abc::$babel->popLanguage();
     self::assertEquals(C::LAN_ID_RU, Abc::$babel->getLanId(), 'Pop 3');
+    self::assertEquals('ltr', Abc::$babel->getDir());
+    self::assertEquals('ru', Abc::$babel->getCode());
 
     Abc::$babel->popLanguage();
     self::assertEquals(C::LAN_ID_EN, Abc::$babel->getLanId(), 'Pop 2');
+    self::assertEquals('ltr', Abc::$babel->getDir());
+    self::assertEquals('en', Abc::$babel->getCode());
 
     Abc::$babel->popLanguage();
     self::assertEquals(C::LAN_ID_EN, Abc::$babel->getLanId(), 'Pop 1');
+    self::assertEquals('ltr', Abc::$babel->getDir());
+    self::assertEquals('en', Abc::$babel->getCode());
   }
 
   //--------------------------------------------------------------------------------------------------------------------
