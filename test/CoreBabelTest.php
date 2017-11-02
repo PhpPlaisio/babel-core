@@ -4,6 +4,7 @@ namespace SetBased\Abc\Babel\Test;
 
 use PHPUnit\Framework\TestCase;
 use SetBased\Abc\Abc;
+use SetBased\Abc\Babel\CoreBabel;
 use SetBased\Abc\C;
 
 /**
@@ -20,7 +21,6 @@ class CoreBabelTest extends TestCase
   private static $abc;
 
   //--------------------------------------------------------------------------------------------------------------------
-
   /**
    * Creates the concrete implementation of the ABC Framework.
    */
@@ -29,6 +29,103 @@ class CoreBabelTest extends TestCase
     parent::setUpBeforeClass();
 
     self::$abc = new Framework();
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Test cases for method getFormattedDate with language en-US and date given as a string.
+   */
+  public function testGetFormattedDate1a()
+  {
+    $formatted = Abc::$babel->getFormattedDate(CoreBabel::FORMAT_FULL, '1966-04-10');
+    self::assertSame('Sunday, April 10, 1966', $formatted, 'full');
+
+    $formatted = Abc::$babel->getFormattedDate(CoreBabel::FORMAT_LONG, '1966-04-10');
+    self::assertSame('April 10, 1966', $formatted, 'long');
+
+    $formatted = Abc::$babel->getFormattedDate(CoreBabel::FORMAT_MEDIUM, '1966-04-10');
+    self::assertSame('Apr 10, 1966', $formatted, 'medium');
+
+    $formatted = Abc::$babel->getFormattedDate(CoreBabel::FORMAT_SHORT, '1966-04-10');
+    self::assertSame('04/10/1966', $formatted, 'short');
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Test cases for method getFormattedDate with language en-US and date given as a DateTime object.
+   */
+  public function testGetFormattedDate1b()
+  {
+    $formatted = Abc::$babel->getFormattedDate(CoreBabel::FORMAT_FULL, new \DateTime('1966-04-10'));
+    self::assertSame('Sunday, April 10, 1966', $formatted, 'full');
+
+    $formatted = Abc::$babel->getFormattedDate(CoreBabel::FORMAT_LONG, new \DateTimeImmutable('1966-04-10'));
+    self::assertSame('April 10, 1966', $formatted, 'long');
+
+    $formatted = Abc::$babel->getFormattedDate(CoreBabel::FORMAT_MEDIUM, new \DateTime('1966-04-10'));
+    self::assertSame('Apr 10, 1966', $formatted, 'medium');
+
+    $formatted = Abc::$babel->getFormattedDate(CoreBabel::FORMAT_SHORT, new \DateTimeImmutable('1966-04-10'));
+    self::assertSame('04/10/1966', $formatted, 'short');
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Test cases for method getFormattedDate with language en-US and empty dates.
+   */
+  public function testGetFormattedDate1c()
+  {
+    $formatted = Abc::$babel->getFormattedDate(CoreBabel::FORMAT_FULL, '');
+    self::assertSame('', $formatted, 'empty');
+
+    $formatted = Abc::$babel->getFormattedDate(CoreBabel::FORMAT_FULL, null);
+    self::assertSame('', $formatted, null);
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Test cases for method getFormattedDate with language nl-NL and date given as a string..
+   */
+  public function testGetFormattedDate2a()
+  {
+    Abc::$babel->pushLanguage(C::LAN_ID_NL);
+
+    $formatted = Abc::$babel->getFormattedDate(CoreBabel::FORMAT_FULL, '1966-04-10');
+    self::assertSame('zondag 10 april 1966', $formatted, 'full');
+
+    $formatted = Abc::$babel->getFormattedDate(CoreBabel::FORMAT_LONG, '1966-04-10');
+    self::assertSame('10 april 1966', $formatted, 'long');
+
+    $formatted = Abc::$babel->getFormattedDate(CoreBabel::FORMAT_MEDIUM, '1966-04-10');
+    self::assertSame('10 apr 1966', $formatted, 'medium');
+
+    $formatted = Abc::$babel->getFormattedDate(CoreBabel::FORMAT_SHORT, '1966-04-10');
+    self::assertSame('10-04-1966', $formatted, 'short');
+
+    Abc::$babel->popLanguage();
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Test cases for method getFormattedDate with language nl-NL and date given as a string..
+   */
+  public function testGetFormattedDate2b()
+  {
+    Abc::$babel->pushLanguage(C::LAN_ID_NL);
+
+    $formatted = Abc::$babel->getFormattedDate(CoreBabel::FORMAT_FULL, new \DateTimeImmutable('1966-04-10'));
+    self::assertSame('zondag 10 april 1966', $formatted, 'full');
+
+    $formatted = Abc::$babel->getFormattedDate(CoreBabel::FORMAT_LONG, new \DateTime('1966-04-10'));
+    self::assertSame('10 april 1966', $formatted, 'long');
+
+    $formatted = Abc::$babel->getFormattedDate(CoreBabel::FORMAT_MEDIUM, new \DateTimeImmutable('1966-04-10'));
+    self::assertSame('10 apr 1966', $formatted, 'medium');
+
+    $formatted = Abc::$babel->getFormattedDate(CoreBabel::FORMAT_SHORT, new \DateTime('1966-04-10'));
+    self::assertSame('10-04-1966', $formatted, 'short');
+
+    Abc::$babel->popLanguage();
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -42,6 +139,44 @@ class CoreBabelTest extends TestCase
 
     $text = Abc::$babel->getHtmlText(C::TXT_ID_HELLO_TEXT_SPECIAL);
     self::assertSame('&lt;Hello Text&gt;', $text, 'TXT_ID_HELLO_TEXT_SPECIAL');
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Test cases for method Babel:getHtmlTextFormatted.
+   */
+  public function testGetHtmlTextFormatted1()
+  {
+    $text = Abc::$babel->getHtmlTextFormatted(C::TXT_ID_FORMATTED1, true, true, ['Hello<br/>World']);
+    self::assertSame('<a href="/">Hello<br/>World</a>', $text, 'TXT_ID_FORMATTED1 true true');
+
+    $text = Abc::$babel->getHtmlTextFormatted(C::TXT_ID_FORMATTED1, true, false, ['Hello<br/>World']);
+    self::assertSame('<a href="/">Hello&lt;br/&gt;World</a>', $text, 'TXT_ID_FORMATTED1 true false');
+
+    $text = Abc::$babel->getHtmlTextFormatted(C::TXT_ID_FORMATTED1, false, false, ['Hello<br/>World']);
+    self::assertSame('&lt;a href=&quot;/&quot;&gt;Hello&lt;br/&gt;World&lt;/a&gt;', $text, 'TXT_ID_FORMATTED1 false false');
+
+    $text = Abc::$babel->getHtmlTextFormatted(C::TXT_ID_FORMATTED1, false, true, ['Hello<br/>World']);
+    self::assertSame('&lt;a href=&quot;/&quot;&gt;Hello<br/>World&lt;/a&gt;', $text, 'TXT_ID_FORMATTED1 false true');
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Test cases for method Babel:getHtmlTextReplaced.
+   */
+  public function testGetHtmlTextReplaced1()
+  {
+    $text = Abc::$babel->getHtmlTextReplaced(C::TXT_ID_REPLACED1, true, true, ['@TEXT@' => 'Hello<br/>World']);
+    self::assertSame('<a href="/">Hello<br/>World</a>', $text, 'TXT_ID_REPLACED1 true true');
+
+    $text = Abc::$babel->getHtmlTextReplaced(C::TXT_ID_REPLACED1, true, false, ['@TEXT@' => 'Hello<br/>World']);
+    self::assertSame('<a href="/">Hello&lt;br/&gt;World</a>', $text, 'TXT_ID_REPLACED1 true false');
+
+    $text = Abc::$babel->getHtmlTextReplaced(C::TXT_ID_REPLACED1, false, false, ['@TEXT@' => 'Hello<br/>World']);
+    self::assertSame('&lt;a href=&quot;/&quot;&gt;Hello&lt;br/&gt;World&lt;/a&gt;', $text, 'TXT_ID_REPLACED1 false false');
+
+    $text = Abc::$babel->getHtmlTextReplaced(C::TXT_ID_REPLACED1, false, true, ['@TEXT@' => 'Hello<br/>World']);
+    self::assertSame('&lt;a href=&quot;/&quot;&gt;Hello<br/>World&lt;/a&gt;', $text, 'TXT_ID_REPLACED1 false true');
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -68,44 +203,6 @@ class CoreBabelTest extends TestCase
 
     $text = Abc::$babel->getText(C::TXT_ID_HELLO_TEXT_SPECIAL);
     self::assertSame('<Hello Text>', $text, 'TXT_ID_HELLO_TEXT_SPECIAL');
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
-   * Test cases for method Babel:getHtmlTextReplaced.
-   */
-  public function testGetHtmlTextReplaced1()
-  {
-    $text = Abc::$babel->getHtmlTextReplaced(C::TXT_ID_REPLACED1, true, true, ['@TEXT@' => 'Hello<br/>World']);
-    self::assertSame('<a href="/">Hello<br/>World</a>', $text, 'TXT_ID_REPLACED1 true true');
-
-    $text = Abc::$babel->getHtmlTextReplaced(C::TXT_ID_REPLACED1, true, false, ['@TEXT@' => 'Hello<br/>World']);
-    self::assertSame('<a href="/">Hello&lt;br/&gt;World</a>', $text, 'TXT_ID_REPLACED1 true false');
-
-    $text = Abc::$babel->getHtmlTextReplaced(C::TXT_ID_REPLACED1, false, false, ['@TEXT@' => 'Hello<br/>World']);
-    self::assertSame('&lt;a href=&quot;/&quot;&gt;Hello&lt;br/&gt;World&lt;/a&gt;', $text, 'TXT_ID_REPLACED1 false false');
-
-    $text = Abc::$babel->getHtmlTextReplaced(C::TXT_ID_REPLACED1, false, true, ['@TEXT@' => 'Hello<br/>World']);
-    self::assertSame('&lt;a href=&quot;/&quot;&gt;Hello<br/>World&lt;/a&gt;', $text, 'TXT_ID_REPLACED1 false true');
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
-   * Test cases for method Babel:getHtmlTextFormatted.
-   */
-  public function testGetHtmlTextFormatted1()
-  {
-    $text = Abc::$babel->getHtmlTextFormatted(C::TXT_ID_FORMATTED1, true, true, ['Hello<br/>World']);
-    self::assertSame('<a href="/">Hello<br/>World</a>', $text, 'TXT_ID_FORMATTED1 true true');
-
-    $text = Abc::$babel->getHtmlTextFormatted(C::TXT_ID_FORMATTED1, true, false, ['Hello<br/>World']);
-    self::assertSame('<a href="/">Hello&lt;br/&gt;World</a>', $text, 'TXT_ID_FORMATTED1 true false');
-
-    $text = Abc::$babel->getHtmlTextFormatted(C::TXT_ID_FORMATTED1, false, false, ['Hello<br/>World']);
-    self::assertSame('&lt;a href=&quot;/&quot;&gt;Hello&lt;br/&gt;World&lt;/a&gt;', $text, 'TXT_ID_FORMATTED1 false false');
-
-    $text = Abc::$babel->getHtmlTextFormatted(C::TXT_ID_FORMATTED1, false, true, ['Hello<br/>World']);
-    self::assertSame('&lt;a href=&quot;/&quot;&gt;Hello<br/>World&lt;/a&gt;', $text, 'TXT_ID_FORMATTED1 false true');
   }
 
   //--------------------------------------------------------------------------------------------------------------------

@@ -9,8 +9,9 @@
   "require": {
     "php": ">=7.0.0",
     "setbased/abc": "^0.10.15",
-    "setbased/abc-babel": "^0.10.4",
-    "setbased/abc-html": "^1.3.0"
+    "setbased/abc-babel": "^0.10.5",
+    "setbased/abc-html": "^1.3.0",
+    "setbased/exception": "^1.1.0"
   },
   "require-dev": {
     "phing/phing": "^2.0.0",

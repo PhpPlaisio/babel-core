@@ -9,9 +9,13 @@ reads sql data
 begin
   select lan_id
   ,      lan_code
-  ,      lan_dir
   ,      lan_lang
   ,      lan_locale
+  ,      lan_dir
+  ,      lan_date_format_full
+  ,      lan_date_format_long
+  ,      lan_date_format_medium
+  ,      lan_date_format_short
   from   ABC_BABEL_LANGUAGE
   where  lan_id = p_lan_id
   ;

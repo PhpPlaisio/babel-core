@@ -4,6 +4,7 @@ namespace SetBased\Abc\Babel;
 
 use SetBased\Abc\Abc;
 use SetBased\Abc\Helper\Html;
+use SetBased\Exception\FallenException;
 use SetBased\Exception\RuntimeException;
 
 /**
@@ -53,6 +54,72 @@ class CoreBabel implements Babel
   public function getDir()
   {
     return $this->language['lan_dir'];
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Returns a date formatted according to a date format specifier.
+   *
+   * @param int                            $dateType The date format specifier. One of:
+   *                                                 <ul>
+   *                                                 <li>Babel::FORMAT_FULL
+   *                                                 <li>Babel::FORMAT_LONG
+   *                                                 <li>Babel::FORMAT_MEDIUM
+   *                                                 <li>Babel::FORMAT_SHORT
+   *                                                 </ul>
+   * @param string|\DateTimeInterface|null $date     The date.
+   *
+   * @return string
+   *
+   * @since 1.0.0
+   * @api
+   */
+  public function getFormattedDate($dateType, $date)
+  {
+    if ($date=='') return '';
+
+    switch ($dateType)
+    {
+      case self::FORMAT_FULL:
+        $format = $this->language['lan_date_format_full'];
+        break;
+
+      case self::FORMAT_LONG:
+        $format = $this->language['lan_date_format_long'];
+        break;
+
+      case self::FORMAT_MEDIUM:
+        $format = $this->language['lan_date_format_medium'];
+        break;
+
+      case self::FORMAT_SHORT:
+        $format = $this->language['lan_date_format_short'];
+        break;
+
+      default:
+        throw new FallenException('dateType', $dateType);
+    }
+
+    $oldLocale = setlocale(LC_TIME, 0);
+    setlocale(LC_TIME, $this->language['lan_locale']);
+
+    switch (true)
+    {
+      case is_string($date):
+        $formatted = strftime($format, strtotime($date));
+        break;
+
+      case is_a($date, '\DateTimeInterface'):
+        $formatted = strftime($format, $date->getTimestamp());
+        break;
+
+      default:
+        throw new FallenException('type', gettype($date));
+    }
+
+    setlocale(LC_TIME, $oldLocale);
+
+    return $formatted;
   }
 
   //--------------------------------------------------------------------------------------------------------------------

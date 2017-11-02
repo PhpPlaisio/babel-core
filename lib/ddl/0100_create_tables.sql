@@ -39,10 +39,10 @@ CREATE TABLE `ABC_BABEL_LANGUAGE` (
   `lan_lang` VARCHAR(12) NOT NULL,
   `lan_locale` VARCHAR(12) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `lan_dir` ENUM('ltr','rtl') NOT NULL,
-  `lan_date_format_full` VARCHAR(12) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `lan_date_format_long` VARCHAR(12) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `lan_date_format_medium` VARCHAR(12) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `lan_date_format_short` VARCHAR(12) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `lan_date_format_full` VARCHAR(20) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `lan_date_format_long` VARCHAR(20) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `lan_date_format_medium` VARCHAR(20) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `lan_date_format_short` VARCHAR(20) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `lan_label` VARCHAR(40) CHARACTER SET ascii COLLATE ascii_general_ci,
   CONSTRAINT `PRIMARY_KEY` PRIMARY KEY (`lan_id`)
 );
@@ -53,8 +53,23 @@ The ID of the word of the name of the language.
 */
 
 /*
+COMMENT ON COLUMN `ABC_BABEL_LANGUAGE`.`lan_code`
+The language code for the ABC-Framework.
+*/
+
+/*
+COMMENT ON COLUMN `ABC_BABEL_LANGUAGE`.`lan_lang`
+The language suitable for the lang tag in HTML (see https://www.w3schools.com/tags/ref_language_codes.asp).
+*/
+
+/*
+COMMENT ON COLUMN `ABC_BABEL_LANGUAGE`.`lan_locale`
+The locale suitable for PHP setlocale function (see http://php.net/manual/en/function.setlocale.php).
+*/
+
+/*
 COMMENT ON COLUMN `ABC_BABEL_LANGUAGE`.`lan_dir`
-The direction of the language.
+The direction of the language (see https://www.w3schools.com/tags/att_global_dir.asp).
 */
 
 CREATE TABLE `ABC_BABEL_TEXT_GROUP` (

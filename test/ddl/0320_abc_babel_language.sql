@@ -13,10 +13,10 @@ values( 1
 ,       1
 ,       'en'
 ,       'en-US'
-,       'en_US.utf8'
+,       'en_US'
 ,       'ltr'
-,       '%B %e, %Y'
-,       '%b %d, %Y'
+,       '%A, %B %e, %Y'
+,       '%B %d, %Y'
 ,       '%b %e, %Y'
 ,       '%x'
 ,       'LAN_ID_EN')
@@ -24,23 +24,23 @@ values( 1
 ,       2
 ,       'nl'
 ,       'nl-NL'
-,       'nl-NL.utf8'
+,       'nl_NL'
 ,       'ltr'
-,       '%e %B %Y'
-,       '%d %b %Y'
+,       '%A %e %B %Y'
+,       '%d %B %Y'
 ,       '%e %b %Y'
-,       '%x'
+,       '%d-%m-%Y'
 ,       'LAN_ID_NL')
 ,     ( 3
 ,       3
 ,       'ru'
 ,       'ru-RU'
-,       'ru-RU.utf8'
+,       'ru_RU'
 ,       'ltr'
-,       '%B %e, %Y'
-,       '%b %d, %Y'
-,       '%b %e, %Y'
-,       '%x'
+,       '%A %e %B %Y'
+,       '%d %B %Y'
+,       '%e %b %Y'
+,       '%d-%m-%Y'
 ,       'LAN_ID_RU')
 ;
 
