@@ -10,6 +10,14 @@ values( 1
 ,       1
 ,       now()
 ,       'TXT_ID_HELLO_TEXT_SPECIAL')
+,     ( 3
+,       1
+,       now()
+,       'TXT_ID_FORMATTED1')
+,     ( 4
+,       1
+,       now()
+,       'TXT_ID_REPLACED1')
 ;
 
 commit;
