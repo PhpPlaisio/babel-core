@@ -23,8 +23,8 @@ values( 1
 ,     ( 2
 ,       2
 ,       'nl'
-,       'nl_NL'
-,       'nl_NL.utf8'
+,       'nl-NL'
+,       'nl-NL.utf8'
 ,       'ltr'
 ,       '%e %B %Y'
 ,       '%d %b %Y'

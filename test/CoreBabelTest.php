@@ -130,30 +130,40 @@ class CoreBabelTest extends TestCase
     self::assertEquals(C::LAN_ID_EN, Abc::$babel->getLanId());
     self::assertEquals('ltr', Abc::$babel->getDir());
     self::assertEquals('en', Abc::$babel->getCode());
+    self::assertEquals('en-US', Abc::$babel->getLang());
 
     Abc::$babel->pushLanguage(C::LAN_ID_EN);
     self::assertEquals(C::LAN_ID_EN, Abc::$babel->getLanId(), 'Push 1');
+    self::assertEquals('en', Abc::$babel->getCode());
+    self::assertEquals('en-US', Abc::$babel->getLang());
 
     Abc::$babel->pushLanguage(C::LAN_ID_RU);
     self::assertEquals(C::LAN_ID_RU, Abc::$babel->getLanId(), 'Push 2');
+    self::assertEquals('ru', Abc::$babel->getCode());
+    self::assertEquals('ru-RU', Abc::$babel->getLang());
 
     Abc::$babel->pushLanguage(C::LAN_ID_NL);
     self::assertEquals(C::LAN_ID_NL, Abc::$babel->getLanId(), 'Push 3');
+    self::assertEquals('nl', Abc::$babel->getCode());
+    self::assertEquals('nl-NL', Abc::$babel->getLang());
 
     Abc::$babel->popLanguage();
     self::assertEquals(C::LAN_ID_RU, Abc::$babel->getLanId(), 'Pop 3');
     self::assertEquals('ltr', Abc::$babel->getDir());
     self::assertEquals('ru', Abc::$babel->getCode());
+    self::assertEquals('ru-RU', Abc::$babel->getLang());
 
     Abc::$babel->popLanguage();
     self::assertEquals(C::LAN_ID_EN, Abc::$babel->getLanId(), 'Pop 2');
     self::assertEquals('ltr', Abc::$babel->getDir());
     self::assertEquals('en', Abc::$babel->getCode());
+    self::assertEquals('en-US', Abc::$babel->getLang());
 
     Abc::$babel->popLanguage();
     self::assertEquals(C::LAN_ID_EN, Abc::$babel->getLanId(), 'Pop 1');
     self::assertEquals('ltr', Abc::$babel->getDir());
     self::assertEquals('en', Abc::$babel->getCode());
+    self::assertEquals('en-US', Abc::$babel->getLang());
   }
 
   //--------------------------------------------------------------------------------------------------------------------
