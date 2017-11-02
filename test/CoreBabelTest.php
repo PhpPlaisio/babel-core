@@ -4,8 +4,7 @@ namespace SetBased\Abc\Babel\Test;
 
 use PHPUnit\Framework\TestCase;
 use SetBased\Abc\Abc;
-use SetBased\Abc\Babel\Test\Abc\C;
-use SetBased\Abc\Babel\Test\Abc\Framework;
+use SetBased\Abc\C;
 
 /**
  * Test cases for class CoreBabel.
@@ -21,6 +20,7 @@ class CoreBabelTest extends TestCase
   private static $abc;
 
   //--------------------------------------------------------------------------------------------------------------------
+
   /**
    * Creates the concrete implementation of the ABC Framework.
    */
@@ -89,25 +89,46 @@ class CoreBabelTest extends TestCase
    */
   public function testLanguageStack()
   {
-    self::assertSame(C::LAN_ID_EN, Abc::$babel->getLanId());
+    self::assertEquals(C::LAN_ID_EN, Abc::$babel->getLanId());
 
     Abc::$babel->pushLanguage(C::LAN_ID_EN);
-    self::assertSame(C::LAN_ID_EN, Abc::$babel->getLanId(), 'Push 1');
+    self::assertEquals(C::LAN_ID_EN, Abc::$babel->getLanId(), 'Push 1');
 
     Abc::$babel->pushLanguage(C::LAN_ID_RU);
-    self::assertSame(C::LAN_ID_RU, Abc::$babel->getLanId(), 'Push 2');
+    self::assertEquals(C::LAN_ID_RU, Abc::$babel->getLanId(), 'Push 2');
 
     Abc::$babel->pushLanguage(C::LAN_ID_NL);
-    self::assertSame(C::LAN_ID_NL, Abc::$babel->getLanId(), 'Push 3');
+    self::assertEquals(C::LAN_ID_NL, Abc::$babel->getLanId(), 'Push 3');
 
     Abc::$babel->popLanguage();
-    self::assertSame(C::LAN_ID_RU, Abc::$babel->getLanId(), 'Pop 3');
+    self::assertEquals(C::LAN_ID_RU, Abc::$babel->getLanId(), 'Pop 3');
 
     Abc::$babel->popLanguage();
-    self::assertSame(C::LAN_ID_EN, Abc::$babel->getLanId(), 'Pop 2');
+    self::assertEquals(C::LAN_ID_EN, Abc::$babel->getLanId(), 'Pop 2');
 
     Abc::$babel->popLanguage();
-    self::assertSame(C::LAN_ID_EN, Abc::$babel->getLanId(), 'Pop 1');
+    self::assertEquals(C::LAN_ID_EN, Abc::$babel->getLanId(), 'Pop 1');
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Connects to the MySQL server and cleans the BLOB tables.
+   */
+  protected function setUp()
+  {
+    Abc::$DL->connect('localhost', 'test', 'test', 'test');
+    Abc::$DL->begin();
+    Abc::$babel->setLanguage(C::LAN_ID_EN);
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Disconnects from the MySQL server.
+   */
+  protected function tearDown()
+  {
+    Abc::$DL->commit();
+    Abc::$DL->disconnect();
   }
 
   //--------------------------------------------------------------------------------------------------------------------

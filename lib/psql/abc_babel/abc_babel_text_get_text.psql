@@ -4,13 +4,13 @@
  * @param p_txt_id The ID of the text.
  * @param p_lan_id The ID of the language.
  */
-create procedure abc_babel_text_get_text(in p_txt_id @bbl_text.txt_id%type@
-,                                        in p_lan_id @bbl_language.lan_id%type@)
+create procedure abc_babel_text_get_text(in p_txt_id @abc_babel_text.txt_id%type@
+,                                        in p_lan_id @abc_babel_language.lan_id%type@)
 reads sql data
 -- type: singleton1
 begin
   select ttt_text
-  from   BBL_TEXT_TEXT
+  from   ABC_BABEL_TEXT_TEXT
   where  txt_id = p_txt_id
   and    lan_id = p_lan_id
   ;

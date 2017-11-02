@@ -1,30 +1,19 @@
 <?php
 //----------------------------------------------------------------------------------------------------------------------
-namespace SetBased\Abc\Babel\Test\Abc;
-
-use SetBased\Abc\Abc;
-use SetBased\Abc\Babel\CoreBabel;
-use SetBased\Abc\ErrorLogger\ErrorLogger;
-use SetBased\Exception\RuntimeException;
+namespace SetBased\Abc;
 
 /**
- * Mock framework for testing purposes.
+ * Constant class for testing purposes.
  */
-class Framework extends Abc
+class C
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Object constructor.
+   * @setbased.stratum.constants
+   *
+   * Below this doc block constants will be inserted by PhpStratum.
    */
-  public function __construct()
-  {
-    parent::__construct();
 
-    self::$babel = new CoreBabel();
-    self::$DL    = new DataLayer();
-
-    self::$babel->setLanguage(C::LAN_ID_EN);
-  }
 
   //--------------------------------------------------------------------------------------------------------------------
 }

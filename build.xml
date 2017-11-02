@@ -10,8 +10,23 @@
               checkreturn="true"/>
     </target>
 
+    <target name="unit-before">
+        <copy file="test/C.txt" tofile="test/C.php" overwrite="true" haltonerror="true"/>
+        <exec command="cat test/ddl/0010_create_database.sql      | mysql -v -u root"      passthru="true" checkreturn="true"/>
+        <exec command="cat test/ddl/0020_create_user.sql          | mysql -v -u root"      passthru="true" checkreturn="true"/>
+        <exec command="cat lib/ddl/0100_create_tables.sql         | mysql -v -u root test" passthru="true" checkreturn="true"/>
+        <exec command="cat test/ddl/0300_abc_babel_text_group.sql | mysql -v -u root test" passthru="true" checkreturn="true"/>
+        <exec command="cat test/ddl/0300_abc_babel_word_group.sql | mysql -v -u root test" passthru="true" checkreturn="true"/>
+        <exec command="cat test/ddl/0310_abc_babel_text.sql       | mysql -v -u root test" passthru="true" checkreturn="true"/>
+        <exec command="cat test/ddl/0310_abc_babel_word.sql       | mysql -v -u root test" passthru="true" checkreturn="true"/>
+        <exec command="cat test/ddl/0320_abc_babel_language.sql   | mysql -v -u root test" passthru="true" checkreturn="true"/>
+        <exec command="cat test/ddl/0330_abc_babel_text_text.sql  | mysql -v -u root test" passthru="true" checkreturn="true"/>
+        <exec command="cat test/ddl/0330_abc_babel_word_text.sql  | mysql -v -u root test" passthru="true" checkreturn="true"/>
+        <exec command="bin/stratum stratum test/etc/stratum.cfg"                           passthru="true" checkreturn="true"/>
+    </target>
+
     <!-- Runs all unit tests -->
-    <target name="unit">
+    <target name="unit" depends="unit-before">
         <exec command="bin/phpunit" passthru="true" checkreturn="true"/>
     </target>
     <target name="build"/>

@@ -1,4 +1,11 @@
 build:
+    dependencies:
+        before:
+            - cp test/C.txt test/C.php
+
+    environment:
+        mysql: 5.7
+
     tests:
         override:
             -
@@ -6,3 +13,4 @@ build:
                 coverage:
                     file: 'test/coverage.xml'
                     format: 'php-clover'
+

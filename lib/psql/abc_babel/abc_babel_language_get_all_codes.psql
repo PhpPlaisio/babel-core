@@ -7,6 +7,6 @@ reads sql data
 begin
   select lan_id
   ,      lan_code
-  from   BBL_LANGUAGE
+  from   ABC_BABEL_LANGUAGE
   ;
 end

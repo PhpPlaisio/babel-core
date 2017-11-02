@@ -1,22 +1,26 @@
 <?php
 //----------------------------------------------------------------------------------------------------------------------
-namespace SetBased\Abc\Babel\Test\Abc;
+namespace SetBased\Abc\Babel\Test;
+
+use SetBased\Abc\Abc;
+use SetBased\Abc\Babel\CoreBabel;
 
 /**
- * CMock constant class for testing purposes.
+ * Mock framework for testing purposes.
  */
-class C
+class Framework extends Abc
 {
   //--------------------------------------------------------------------------------------------------------------------
-  const LAN_ID_EN = 1;
-  const LAN_ID_NL = 2;
-  const LAN_ID_RU = 3;
+  /**
+   * Object constructor.
+   */
+  public function __construct()
+  {
+    parent::__construct();
 
-  const WRD_ID_HELLO_WORD = 1;
-  const WRD_ID_HELLO_WORD_SPECIAL = 2;
-
-  const TXT_ID_HELLO_TEXT = 1;
-  const TXT_ID_HELLO_TEXT_SPECIAL = 2;
+    self::$babel = new CoreBabel();
+    self::$DL    = new TestDataLayer();
+  }
 
   //--------------------------------------------------------------------------------------------------------------------
 }
