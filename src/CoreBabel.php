@@ -226,24 +226,16 @@ class CoreBabel implements Babel
   /**
    * Returns the value of a text.
    *
-   * @param int        $txtId The ID of the text.
-   * @param array|null $args  The arguments when the text is a format string.
+   * @param int $txtId The ID of the text.
    *
    * @return string
    *
    * @since 1.0.0
    * @api
    */
-  public function getText($txtId, $args = null)
+  public function getText($txtId)
   {
-    $text = Abc::$DL->abcBabelTextGetText($txtId, $this->language['lan_id']);
-
-    if (empty($args))
-    {
-      return $text;
-    }
-
-    return vsprintf($text, $args);
+    return Abc::$DL->abcBabelTextGetText($txtId, $this->language['lan_id']);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
