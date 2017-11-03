@@ -13,7 +13,7 @@ values( 1
 ,       1
 ,       'en'
 ,       'en-US'
-,       'en_US'
+,       'en_US.utf8'
 ,       'ltr'
 ,       '%A, %B %e, %Y'
 ,       '%B %d, %Y'
@@ -24,7 +24,7 @@ values( 1
 ,       2
 ,       'nl'
 ,       'nl-NL'
-,       'nl_NL'
+,       'nl_NL.utf8'
 ,       'ltr'
 ,       '%A %e %B %Y'
 ,       '%d %B %Y'
@@ -35,7 +35,7 @@ values( 1
 ,       3
 ,       'ru'
 ,       'ru-RU'
-,       'ru_RU'
+,       'ru_RU.utf8'
 ,       'ltr'
 ,       '%A %e %B %Y'
 ,       '%d %B %Y'
