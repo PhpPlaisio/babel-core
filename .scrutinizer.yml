@@ -1,6 +1,10 @@
 build:
     dependencies:
         before:
+            - sudo locale-gen en_US
+            - sudo locale-gen en_US.utf8
+            - sudo locale-gen nl_NL
+            - sudo locale-gen nl_NL.utf8
             - cp test/C.txt test/C.php
 
     environment:

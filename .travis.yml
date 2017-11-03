@@ -13,6 +13,10 @@ before_install:
   - mysql --version
   - mysql -u root -e "set global binlog_format = 'row';"
   - mysql -u root -e "set global log_bin_trust_function_creators = 1;"
+  - sudo locale-gen en_US
+  - sudo locale-gen en_US.utf8
+  - sudo locale-gen nl_NL
+  - sudo locale-gen nl_NL.utf8
 
 install:
   - composer self-update
