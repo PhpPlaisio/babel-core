@@ -5,7 +5,7 @@
 /*  FileName : abc-babel-core.ecm                                                 */
 /*  Platform : MySQL 5                                                            */
 /*  Version  : Concept                                                            */
-/*  Date     : donderdag 2 november 2017                                          */
+/*  Date     : zaterdag 4 november 2017                                           */
 /*================================================================================*/
 /*================================================================================*/
 /* CREATE TABLES                                                                  */
@@ -21,7 +21,7 @@ CREATE TABLE `ABC_BABEL_WORD_GROUP` (
 CREATE TABLE `ABC_BABEL_WORD` (
   `wrd_id` SMALLINT UNSIGNED AUTO_INCREMENT NOT NULL,
   `wdg_id` TINYINT UNSIGNED NOT NULL,
-  `wrd_timestamp` TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
+  `wrd_timestamp` TIMESTAMP DEFAULT now() NOT NULL,
   `wrd_comment` VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_general_ci,
   `wrd_label` VARCHAR(50) CHARACTER SET ascii COLLATE ascii_general_ci,
   CONSTRAINT `PRIMARY_KEY` PRIMARY KEY (`wrd_id`)
@@ -82,7 +82,7 @@ CREATE TABLE `ABC_BABEL_TEXT_GROUP` (
 CREATE TABLE `ABC_BABEL_TEXT` (
   `txt_id` SMALLINT UNSIGNED AUTO_INCREMENT NOT NULL,
   `ttg_id` TINYINT UNSIGNED NOT NULL,
-  `txt_timestamp` TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
+  `txt_timestamp` TIMESTAMP DEFAULT now() NOT NULL,
   `txt_comment` TINYTEXT,
   `txt_label` VARCHAR(50) CHARACTER SET ascii COLLATE ascii_general_ci,
   CONSTRAINT `PRIMARY_KEY` PRIMARY KEY (`txt_id`)
@@ -97,7 +97,7 @@ CREATE TABLE `ABC_BABEL_TEXT_TEXT` (
   `txt_id` SMALLINT UNSIGNED NOT NULL,
   `lan_id` TINYINT UNSIGNED NOT NULL,
   `ttt_text` MEDIUMTEXT NOT NULL,
-  `ttt_timestamp` TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
+  `ttt_timestamp` TIMESTAMP DEFAULT now() NOT NULL,
   CONSTRAINT `PRIMARY_KEY` PRIMARY KEY (`txt_id`, `lan_id`)
 );
 
@@ -120,7 +120,7 @@ CREATE TABLE `ABC_BABEL_WORD_TEXT` (
   `wrd_id` SMALLINT UNSIGNED NOT NULL,
   `lan_id` TINYINT UNSIGNED NOT NULL,
   `wdt_text` VARCHAR(80) NOT NULL,
-  `wdt_timestamp` TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
+  `wdt_timestamp` TIMESTAMP DEFAULT now() NOT NULL,
   CONSTRAINT `PRIMARY_KEY` PRIMARY KEY (`wrd_id`, `lan_id`)
 );
 

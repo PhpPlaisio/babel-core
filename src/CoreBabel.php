@@ -101,7 +101,8 @@ class CoreBabel implements Babel
     }
 
     $oldLocale = setlocale(LC_TIME, 0);
-    setlocale(LC_TIME, $this->language['lan_locale']);
+    $locale = setlocale(LC_TIME, $this->language['lan_locale']);
+    if ($locale===false) throw new RuntimeException('Unable to set locate to %d', $this->language['lan_locale']);
 
     switch (true)
     {
