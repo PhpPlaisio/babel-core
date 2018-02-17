@@ -2,6 +2,7 @@ language: php
 php:
   - '7.0'
   - '7.1'
+  - '7.2'
   - nightly
   
 sudo: true
@@ -20,11 +21,7 @@ before_install:
 
 install:
   - composer self-update
-  - cp test/C.txt test/C.php
   - composer update
 
 script:
   - ./bin/phing unit
-
-after_script:
-  - mv test/C.php test/C.txt
