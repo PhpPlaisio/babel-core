@@ -204,7 +204,7 @@ class CoreBabelTest extends TestCase
     self::assertEquals(1, $map['en']);
     self::assertEquals(2, $map['nl']);
     self::assertEquals(3, $map['ru']);
-    self::assertEquals(4, $map['nlbe']);
+    self::assertEquals(4, $map['nl-be']);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -265,7 +265,7 @@ class CoreBabelTest extends TestCase
 
     Abc::$babel->pushLanguage(C::LAN_ID_NL_BE);
     self::assertEquals(C::LAN_ID_NL_BE, Abc::$babel->getLanId(), 'Push 4');
-    self::assertEquals('nlbe', Abc::$babel->getInternalCode());
+    self::assertEquals('nl-be', Abc::$babel->getInternalCode());
     self::assertEquals('nl', Abc::$babel->getLang());
     self::assertEquals('nl_BE.utf8', Abc::$babel->getLocale());
 

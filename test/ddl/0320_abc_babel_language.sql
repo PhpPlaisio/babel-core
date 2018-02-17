@@ -44,7 +44,7 @@ values( 1
 ,       'LAN_ID_RU')
 ,     ( 4
 ,       2
-,       'nlbe'
+,       'nl-be'
 ,       'nl'
 ,       'nl_BE.utf8'
 ,       'ltr'
