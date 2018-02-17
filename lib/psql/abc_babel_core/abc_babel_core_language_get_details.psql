@@ -3,7 +3,7 @@
  *
  * @param p_lan_id The ID of the language.
  */
-create procedure abc_babel_language_get_details(in p_lan_id @abc_babel_language.lan_id%type@)
+create procedure abc_babel_core_language_get_details(in p_lan_id @abc_babel_language.lan_id%type@)
 reads sql data
 -- type: row1
 begin

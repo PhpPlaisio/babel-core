@@ -169,12 +169,12 @@ class CoreBabel implements Babel
         return Html::txt2Html($this->getTextFormatted($txtId, $args));
 
       case ($formatIsHtml===false && $argsAreHtml===true):
-        $text = Abc::$DL->abcBabelTextGetText($txtId, $this->language['lan_id']);
+        $text = Abc::$DL->abcBabelCoreTextGetText($txtId, $this->language['lan_id']);
 
         return vsprintf(Html::txt2Html($text), $args);
 
       case ($formatIsHtml===true && $argsAreHtml===false):
-        $text = Abc::$DL->abcBabelTextGetText($txtId, $this->language['lan_id']);
+        $text = Abc::$DL->abcBabelCoreTextGetText($txtId, $this->language['lan_id']);
 
         $tmp = [];
         foreach ($args as $arg)
@@ -222,12 +222,12 @@ class CoreBabel implements Babel
         return Html::txt2Html($this->getTextReplaced($txtId, $replacePairs));
 
       case ($formatIsHtml===false && $valuesAreHtml===true):
-        $text = Abc::$DL->abcBabelTextGetText($txtId, $this->language['lan_id']);
+        $text = Abc::$DL->abcBabelCoreTextGetText($txtId, $this->language['lan_id']);
 
         return strtr(Html::txt2Html($text), $replacePairs);
 
       case ($formatIsHtml===true && $valuesAreHtml===false):
-        $text = Abc::$DL->abcBabelTextGetText($txtId, $this->language['lan_id']);
+        $text = Abc::$DL->abcBabelCoreTextGetText($txtId, $this->language['lan_id']);
 
         $tmp = [];
         foreach ($replacePairs as $key => $value)
@@ -303,7 +303,7 @@ class CoreBabel implements Babel
    */
   public function getText($txtId)
   {
-    return Abc::$DL->abcBabelTextGetText($txtId, $this->language['lan_id']);
+    return Abc::$DL->abcBabelCoreTextGetText($txtId, $this->language['lan_id']);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -321,7 +321,7 @@ class CoreBabel implements Babel
    */
   public function getTextFormatted($txtId, $args)
   {
-    $text = Abc::$DL->abcBabelTextGetText($txtId, $this->language['lan_id']);
+    $text = Abc::$DL->abcBabelCoreTextGetText($txtId, $this->language['lan_id']);
 
     return vsprintf($text, $args);
   }
@@ -341,7 +341,7 @@ class CoreBabel implements Babel
    */
   public function getTextReplaced($txtId, $replacePairs)
   {
-    $text = Abc::$DL->abcBabelTextGetText($txtId, $this->language['lan_id']);
+    $text = Abc::$DL->abcBabelCoreTextGetText($txtId, $this->language['lan_id']);
 
     return strtr($text, $replacePairs);
   }
@@ -359,7 +359,7 @@ class CoreBabel implements Babel
    */
   public function getWord($wrdId)
   {
-    return Abc::$DL->abcBabelWordGetWord($wrdId, $this->language['lan_id']);
+    return Abc::$DL->abcBabelCoreWordGetWord($wrdId, $this->language['lan_id']);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -390,7 +390,7 @@ class CoreBabel implements Babel
    */
   public function pushLanguage($lanId)
   {
-    $this->language = Abc::$DL->abcBabelLanguageGetDetails($lanId);
+    $this->language = Abc::$DL->abcBabelCoreLanguageGetDetails($lanId);
     array_push($this->stack, $this->language);
   }
 
@@ -407,7 +407,7 @@ class CoreBabel implements Babel
    */
   public function setLanguage($lanId)
   {
-    $this->language                               = Abc::$DL->abcBabelLanguageGetDetails($lanId);
+    $this->language                               = Abc::$DL->abcBabelCoreLanguageGetDetails($lanId);
     $this->stack[max(0, count($this->stack) - 1)] = $this->language;
   }
 
