@@ -14,7 +14,7 @@ class CoreBabel implements Babel
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * The details of the (default) language.
+   * The details of the current language.
    *
    * @var array
    */
@@ -29,7 +29,7 @@ class CoreBabel implements Babel
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Returns the language code of the current default language.
+   * Returns the internal language code of the current language.
    *
    * @return string
    *
@@ -43,7 +43,7 @@ class CoreBabel implements Babel
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Returns the direction of the current default language. See [dir](https://www.w3schools.com/tags/att_global_dir.asp)
+   * Returns the direction of the current language. See [dir](https://www.w3schools.com/tags/att_global_dir.asp)
    * attribute.
    *
    * @return string
@@ -125,7 +125,7 @@ class CoreBabel implements Babel
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Returns a text in the default language with special characters converted to HTML entities.
+   * Returns a text in the current language with special characters converted to HTML entities.
    *
    * @param int $txtId The ID of the text.
    *
@@ -141,7 +141,7 @@ class CoreBabel implements Babel
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Returns a text in the default language using formatting (using
+   * Returns a text in the current language using formatting (using
    * [vsprintf](http://php.net/manual/en/function.vsprintf.php)) with special characters converted to HTML entities.
    *
    * @param int   $txtId        The ID of the text.
@@ -194,7 +194,7 @@ class CoreBabel implements Babel
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Returns a text in the default language in which substrings are replaced (using
+   * Returns a text in the current language in which substrings are replaced (using
    * [strtr](http://php.net/manual/en/function.strtr.php)) with special characters converted to HTML entities.
    *
    * @param int   $txtId         The ID of the text.
@@ -247,7 +247,7 @@ class CoreBabel implements Babel
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Returns a word in the default language with special characters converted to HTML entities.
+   * Returns a word in the current language with special characters converted to HTML entities.
    *
    * @param int $wrdId The ID of the word.
    *
@@ -277,7 +277,7 @@ class CoreBabel implements Babel
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Returns the ISO 639-1 language code of the current default language. See
+   * Returns the ISO 639-1 language code of the current language. See
    * [lang](https://www.w3schools.com/tags/ref_language_codes.asp) attribute.
    *
    * @return string
@@ -308,7 +308,7 @@ class CoreBabel implements Babel
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Returns a text in the default language using formatting (using
+   * Returns a text in the current language using formatting (using
    * [vsprintf](http://php.net/manual/en/function.vsprintf.php)).
    *
    * @param int   $txtId The ID of the text.
@@ -328,7 +328,7 @@ class CoreBabel implements Babel
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Returns a text in the default language in which substrings are replaced (using
+   * Returns a text in the current language in which substrings are replaced (using
    * [strtr](http://php.net/manual/en/function.strtr.php)).
    *
    * @param int   $txtId        The ID of the text.
@@ -364,7 +364,7 @@ class CoreBabel implements Babel
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Restores the previous default language as the current default language.
+   * Restores the previous language as the current language.
    *
    * @return void
    *
@@ -379,9 +379,9 @@ class CoreBabel implements Babel
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Sets a new default language.
+   * Sets and pushes a new current language.
    *
-   * @param int $lanId The ID of the new default language.
+   * @param int $lanId The ID of the new current language.
    *
    * @return void
    *
@@ -396,9 +396,9 @@ class CoreBabel implements Babel
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Replace the current default language with a new default language.
+   * Replaces the current language.
    *
-   * @param int $lanId The ID of the new default language.
+   * @param int $lanId The ID of the new current language.
    *
    * @return void
    *
