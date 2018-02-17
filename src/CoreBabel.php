@@ -28,6 +28,7 @@ class CoreBabel implements Babel
   private $stack = [];
 
   //--------------------------------------------------------------------------------------------------------------------
+
   /**
    * Returns the internal language code of the current language.
    *
@@ -101,7 +102,7 @@ class CoreBabel implements Babel
     }
 
     $oldLocale = setlocale(LC_TIME, 0);
-    $locale = setlocale(LC_TIME, $this->language['lan_locale']);
+    $locale    = setlocale(LC_TIME, $this->language['lan_locale']);
     if ($locale===false) throw new RuntimeException('Unable to set locate to %d', $this->language['lan_locale']);
 
     switch (true)
@@ -263,6 +264,36 @@ class CoreBabel implements Babel
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
+   * Returns the internal language code of the current language.
+   *
+   * @return string
+   *
+   * @since 1.0.0
+   * @api
+   */
+  public function getInternalCode()
+  {
+    return $this->language['lan_code'];
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Returns a map from internal language code to the ID of the language for all available languages. In other words
+   * returns an array of which keys are internal language codes and the values are the ID of the corresponding
+   * language.
+   *
+   * @return array
+   *
+   * @since 1.0.0
+   * @api
+   */
+  public function getInternalLanguageMap()
+  {
+    return Abc::$DL->abcBabelCoreInternalCodeMap();
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
    * Returns the ID of the language.
    *
    * @return int
@@ -288,6 +319,21 @@ class CoreBabel implements Babel
   public function getLang()
   {
     return $this->language['lan_lang'];
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Returns the locale suitable for PHP [setlocale](http://php.net/manual/en/function.setlocale.php) of the current
+   * language.
+   *
+   * @return string
+   *
+   * @since 1.0.0
+   * @api
+   */
+  public function getLocale()
+  {
+    return $this->language['lan_locale'];
   }
 
   //--------------------------------------------------------------------------------------------------------------------

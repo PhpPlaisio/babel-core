@@ -12,7 +12,7 @@ insert into ABC_BABEL_LANGUAGE( lan_id
 values( 1
 ,       1
 ,       'en'
-,       'en-US'
+,       'en'
 ,       'en_US.utf8'
 ,       'ltr'
 ,       '%A, %B %e, %Y'
@@ -23,7 +23,7 @@ values( 1
 ,     ( 2
 ,       2
 ,       'nl'
-,       'nl-NL'
+,       'nl'
 ,       'nl_NL.utf8'
 ,       'ltr'
 ,       '%A %e %B %Y'
@@ -34,7 +34,7 @@ values( 1
 ,     ( 3
 ,       3
 ,       'ru'
-,       'ru-RU'
+,       'ru'
 ,       'ru_RU.utf8'
 ,       'ltr'
 ,       '%A %e %B %Y'
@@ -42,6 +42,17 @@ values( 1
 ,       '%e %b %Y'
 ,       '%d-%m-%Y'
 ,       'LAN_ID_RU')
+,     ( 4
+,       2
+,       'nlbe'
+,       'nl'
+,       'nl_BE.utf8'
+,       'ltr'
+,       '%A %e %B %Y'
+,       '%d %B %Y'
+,       '%e %b %Y'
+,       '%d-%m-%Y'
+,       'LAN_ID_NL_BE')
 ;
 
 commit;

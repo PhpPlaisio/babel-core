@@ -21,6 +21,7 @@ class CoreBabelTest extends TestCase
   private static $abc;
 
   //--------------------------------------------------------------------------------------------------------------------
+
   /**
    * Creates the concrete implementation of the ABC Framework.
    */
@@ -194,6 +195,20 @@ class CoreBabelTest extends TestCase
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
+   * Test cases for method getInternalLanguageMap.
+   */
+  public function testGetInternalLanguageMap()
+  {
+    $map = Abc::$babel->getInternalLanguageMap();
+    self::assertSame(4, sizeof($map));
+    self::assertEquals(1, $map['en']);
+    self::assertEquals(2, $map['nl']);
+    self::assertEquals(3, $map['ru']);
+    self::assertEquals(4, $map['nlbe']);
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
    * Test cases for method Babel:getText.
    */
   public function testGetText1()
@@ -226,41 +241,61 @@ class CoreBabelTest extends TestCase
   {
     self::assertEquals(C::LAN_ID_EN, Abc::$babel->getLanId());
     self::assertEquals('ltr', Abc::$babel->getDir());
-    self::assertEquals('en', Abc::$babel->getCode());
-    self::assertEquals('en-US', Abc::$babel->getLang());
+    self::assertEquals('en', Abc::$babel->getInternalCode());
+    self::assertEquals('en', Abc::$babel->getLang());
+    self::assertEquals('en_US.utf8', Abc::$babel->getLocale());
 
     Abc::$babel->pushLanguage(C::LAN_ID_EN);
     self::assertEquals(C::LAN_ID_EN, Abc::$babel->getLanId(), 'Push 1');
-    self::assertEquals('en', Abc::$babel->getCode());
-    self::assertEquals('en-US', Abc::$babel->getLang());
+    self::assertEquals('en', Abc::$babel->getInternalCode());
+    self::assertEquals('en', Abc::$babel->getLang());
+    self::assertEquals('en_US.utf8', Abc::$babel->getLocale());
 
     Abc::$babel->pushLanguage(C::LAN_ID_RU);
     self::assertEquals(C::LAN_ID_RU, Abc::$babel->getLanId(), 'Push 2');
-    self::assertEquals('ru', Abc::$babel->getCode());
-    self::assertEquals('ru-RU', Abc::$babel->getLang());
+    self::assertEquals('ru', Abc::$babel->getInternalCode());
+    self::assertEquals('ru', Abc::$babel->getLang());
+    self::assertEquals('ru_RU.utf8', Abc::$babel->getLocale());
 
     Abc::$babel->pushLanguage(C::LAN_ID_NL);
     self::assertEquals(C::LAN_ID_NL, Abc::$babel->getLanId(), 'Push 3');
-    self::assertEquals('nl', Abc::$babel->getCode());
-    self::assertEquals('nl-NL', Abc::$babel->getLang());
+    self::assertEquals('nl', Abc::$babel->getInternalCode());
+    self::assertEquals('nl', Abc::$babel->getLang());
+    self::assertEquals('nl_NL.utf8', Abc::$babel->getLocale());
+
+    Abc::$babel->pushLanguage(C::LAN_ID_NL_BE);
+    self::assertEquals(C::LAN_ID_NL_BE, Abc::$babel->getLanId(), 'Push 4');
+    self::assertEquals('nlbe', Abc::$babel->getInternalCode());
+    self::assertEquals('nl', Abc::$babel->getLang());
+    self::assertEquals('nl_BE.utf8', Abc::$babel->getLocale());
+
+    Abc::$babel->popLanguage();
+    self::assertEquals(C::LAN_ID_NL, Abc::$babel->getLanId(), 'Pop 4');
+    self::assertEquals('ltr', Abc::$babel->getDir());
+    self::assertEquals('nl', Abc::$babel->getInternalCode());
+    self::assertEquals('nl', Abc::$babel->getLang());
+    self::assertEquals('nl_NL.utf8', Abc::$babel->getLocale());
 
     Abc::$babel->popLanguage();
     self::assertEquals(C::LAN_ID_RU, Abc::$babel->getLanId(), 'Pop 3');
     self::assertEquals('ltr', Abc::$babel->getDir());
-    self::assertEquals('ru', Abc::$babel->getCode());
-    self::assertEquals('ru-RU', Abc::$babel->getLang());
+    self::assertEquals('ru', Abc::$babel->getInternalCode());
+    self::assertEquals('ru', Abc::$babel->getLang());
+    self::assertEquals('ru_RU.utf8', Abc::$babel->getLocale());
 
     Abc::$babel->popLanguage();
     self::assertEquals(C::LAN_ID_EN, Abc::$babel->getLanId(), 'Pop 2');
     self::assertEquals('ltr', Abc::$babel->getDir());
-    self::assertEquals('en', Abc::$babel->getCode());
-    self::assertEquals('en-US', Abc::$babel->getLang());
+    self::assertEquals('en', Abc::$babel->getInternalCode());
+    self::assertEquals('en', Abc::$babel->getLang());
+    self::assertEquals('en_US.utf8', Abc::$babel->getLocale());
 
     Abc::$babel->popLanguage();
     self::assertEquals(C::LAN_ID_EN, Abc::$babel->getLanId(), 'Pop 1');
     self::assertEquals('ltr', Abc::$babel->getDir());
-    self::assertEquals('en', Abc::$babel->getCode());
-    self::assertEquals('en-US', Abc::$babel->getLang());
+    self::assertEquals('en', Abc::$babel->getInternalCode());
+    self::assertEquals('en', Abc::$babel->getLang());
+    self::assertEquals('en_US.utf8', Abc::$babel->getLocale());
   }
 
   //--------------------------------------------------------------------------------------------------------------------

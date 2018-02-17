@@ -15,6 +15,7 @@ class C
    */
   const LAN_ID_EN                 = 1;
   const LAN_ID_NL                 = 2;
+  const LAN_ID_NL_BE              = 4;
   const LAN_ID_RU                 = 3;
   const TTG_ID_TEST               = 1;
   const TXT_ID_FORMATTED1         = 3;
