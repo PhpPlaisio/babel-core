@@ -1,0 +1,17 @@
+<abc>
+    <database>
+        <provides>
+            <table>ABC_BABEL_LANGUAGE</table>
+            <table>ABC_BABEL_WORD</table>
+            <table>ABC_BABEL_TEXT</table>
+        </provides>
+        <scripts>
+            <script>lib/ddl/0100_create_tables.sql</script>
+        </scripts>
+    </database>
+    <stratum>
+        <includes>
+            <include>lib/psql/**/*.psql</include>
+        </includes>
+    </stratum>
+</abc>
