@@ -1,5 +1,5 @@
 <?php
-//----------------------------------------------------------------------------------------------------------------------
+
 namespace SetBased\Abc\Babel;
 
 use SetBased\Abc\Abc;
@@ -37,7 +37,7 @@ class CoreBabel implements Babel
    * @since 1.0.0
    * @api
    */
-  public function getCode()
+  public function getCode(): string
   {
     return $this->language['lan_code'];
   }
@@ -52,7 +52,7 @@ class CoreBabel implements Babel
    * @since 1.0.0
    * @api
    */
-  public function getDir()
+  public function getDir(): string
   {
     return $this->language['lan_dir'];
   }
@@ -75,7 +75,7 @@ class CoreBabel implements Babel
    * @since 1.0.0
    * @api
    */
-  public function getFormattedDate($dateType, $date)
+  public function getFormattedDate(int $dateType, $date): string
   {
     if ($date=='') return '';
 
@@ -103,7 +103,7 @@ class CoreBabel implements Babel
 
     $oldLocale = setlocale(LC_TIME, 0);
     $locale    = setlocale(LC_TIME, $this->language['lan_locale']);
-    if ($locale===false) throw new RuntimeException('Unable to set locate to %d', $this->language['lan_locale']);
+    if ($locale===false) throw new RuntimeException('Unable to set locate to %s', $this->language['lan_locale']);
 
     switch (true)
     {
@@ -135,7 +135,7 @@ class CoreBabel implements Babel
    * @since 1.0.0
    * @api
    */
-  public function getHtmlText($txtId)
+  public function getHtmlText(int $txtId): string
   {
     return Html::txt2Html($this->getText($txtId));
   }
@@ -159,11 +159,8 @@ class CoreBabel implements Babel
    * @since 1.0.0
    * @api
    */
-  public function getHtmlTextFormatted($txtId, $formatIsHtml, $argsAreHtml, $args)
+  public function getHtmlTextFormatted(int $txtId, bool $formatIsHtml, bool $argsAreHtml, array $args): string
   {
-    $formatIsHtml = !empty($formatIsHtml);
-    $argsAreHtml  = !empty($argsAreHtml);
-
     switch (true)
     {
       case ($formatIsHtml===false && $argsAreHtml===false):
@@ -212,11 +209,8 @@ class CoreBabel implements Babel
    * @since 1.0.0
    * @api
    */
-  public function getHtmlTextReplaced($txtId, $formatIsHtml, $valuesAreHtml, $replacePairs)
+  public function getHtmlTextReplaced(int $txtId, bool $formatIsHtml, bool $valuesAreHtml, array $replacePairs): string
   {
-    $formatIsHtml  = !empty($formatIsHtml);
-    $valuesAreHtml = !empty($valuesAreHtml);
-
     switch (true)
     {
       case ($formatIsHtml===false && $valuesAreHtml===false):
@@ -257,7 +251,7 @@ class CoreBabel implements Babel
    * @since 1.0.0
    * @api
    */
-  public function getHtmlWord($wrdId)
+  public function getHtmlWord(int $wrdId): string
   {
     return Html::txt2Html($this->getWord($wrdId));
   }
@@ -271,7 +265,7 @@ class CoreBabel implements Babel
    * @since 1.0.0
    * @api
    */
-  public function getInternalCode()
+  public function getInternalCode(): string
   {
     return $this->language['lan_code'];
   }
@@ -287,7 +281,7 @@ class CoreBabel implements Babel
    * @since 1.0.0
    * @api
    */
-  public function getInternalLanguageMap()
+  public function getInternalLanguageMap(): array
   {
     return Abc::$DL->abcBabelCoreInternalCodeMap();
   }
@@ -301,7 +295,7 @@ class CoreBabel implements Babel
    * @since 1.0.0
    * @api
    */
-  public function getLanId()
+  public function getLanId(): int
   {
     return $this->language['lan_id'];
   }
@@ -316,7 +310,7 @@ class CoreBabel implements Babel
    * @since 1.0.0
    * @api
    */
-  public function getLang()
+  public function getLang(): string
   {
     return $this->language['lan_lang'];
   }
@@ -331,7 +325,7 @@ class CoreBabel implements Babel
    * @since 1.0.0
    * @api
    */
-  public function getLocale()
+  public function getLocale(): string
   {
     return $this->language['lan_locale'];
   }
@@ -347,7 +341,7 @@ class CoreBabel implements Babel
    * @since 1.0.0
    * @api
    */
-  public function getText($txtId)
+  public function getText(int $txtId): string
   {
     return Abc::$DL->abcBabelCoreTextGetText($txtId, $this->language['lan_id']);
   }
@@ -365,7 +359,7 @@ class CoreBabel implements Babel
    * @since 1.0.0
    * @api
    */
-  public function getTextFormatted($txtId, $args)
+  public function getTextFormatted(int $txtId, array $args): string
   {
     $text = Abc::$DL->abcBabelCoreTextGetText($txtId, $this->language['lan_id']);
 
@@ -385,7 +379,7 @@ class CoreBabel implements Babel
    * @since 1.0.0
    * @api
    */
-  public function getTextReplaced($txtId, $replacePairs)
+  public function getTextReplaced(int $txtId, array $replacePairs): string
   {
     $text = Abc::$DL->abcBabelCoreTextGetText($txtId, $this->language['lan_id']);
 
@@ -403,7 +397,7 @@ class CoreBabel implements Babel
    * @since 1.0.0
    * @api
    */
-  public function getWord($wrdId)
+  public function getWord(int $wrdId): string
   {
     return Abc::$DL->abcBabelCoreWordGetWord($wrdId, $this->language['lan_id']);
   }
@@ -417,7 +411,7 @@ class CoreBabel implements Babel
    * @since 1.0.0
    * @api
    */
-  public function popLanguage()
+  public function popLanguage(): void
   {
     array_pop($this->stack);
     $this->language = $this->stack[count($this->stack) - 1];
@@ -434,7 +428,7 @@ class CoreBabel implements Babel
    * @since 1.0.0
    * @api
    */
-  public function pushLanguage($lanId)
+  public function pushLanguage(int $lanId): void
   {
     $this->language = Abc::$DL->abcBabelCoreLanguageGetDetails($lanId);
     array_push($this->stack, $this->language);
@@ -451,7 +445,7 @@ class CoreBabel implements Babel
    * @since 1.0.0
    * @api
    */
-  public function setLanguage($lanId)
+  public function setLanguage(int $lanId): void
   {
     $this->language                               = Abc::$DL->abcBabelCoreLanguageGetDetails($lanId);
     $this->stack[max(0, count($this->stack) - 1)] = $this->language;
