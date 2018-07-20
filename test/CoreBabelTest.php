@@ -73,9 +73,28 @@ class CoreBabelTest extends TestCase
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Test cases for method getFormattedDate with language en-US and empty dates.
+   * Test cases for method getFormattedDate with language en-US and date given as an int.
    */
   public function testGetFormattedDate1c()
+  {
+    $formatted = Abc::$babel->getFormattedDate(CoreBabel::FORMAT_FULL, 19660410);
+    self::assertSame('Sunday, April 10, 1966', $formatted, 'full');
+
+    $formatted = Abc::$babel->getFormattedDate(CoreBabel::FORMAT_LONG, 19660410);
+    self::assertSame('April 10, 1966', $formatted, 'long');
+
+    $formatted = Abc::$babel->getFormattedDate(CoreBabel::FORMAT_MEDIUM, 19660410);
+    self::assertSame('Apr 10, 1966', $formatted, 'medium');
+
+    $formatted = Abc::$babel->getFormattedDate(CoreBabel::FORMAT_SHORT, 19660410);
+    self::assertSame('04/10/1966', $formatted, 'short');
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Test cases for method getFormattedDate with language en-US and empty dates.
+   */
+  public function testGetFormattedDate1d()
   {
     $formatted = Abc::$babel->getFormattedDate(CoreBabel::FORMAT_FULL, '');
     self::assertSame('', $formatted, 'empty');
@@ -109,7 +128,7 @@ class CoreBabelTest extends TestCase
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Test cases for method getFormattedDate with language nl-NL and date given as a string..
+   * Test cases for method getFormattedDate with language nl-NL and date given as an object.
    */
   public function testGetFormattedDate2b()
   {
@@ -125,6 +144,29 @@ class CoreBabelTest extends TestCase
     self::assertSame('10 apr 1966', $formatted, 'medium');
 
     $formatted = Abc::$babel->getFormattedDate(CoreBabel::FORMAT_SHORT, new \DateTime('1966-04-10'));
+    self::assertSame('10-04-1966', $formatted, 'short');
+
+    Abc::$babel->popLanguage();
+  }
+
+  //--------------------------------------------------------------------------------------------------------------------
+  /**
+   * Test cases for method getFormattedDate with language nl-NL and date given as an int.
+   */
+  public function testGetFormattedDate2c()
+  {
+    Abc::$babel->pushLanguage(C::LAN_ID_NL);
+
+    $formatted = Abc::$babel->getFormattedDate(CoreBabel::FORMAT_FULL, 19660410);
+    self::assertSame('zondag 10 april 1966', $formatted, 'full');
+
+    $formatted = Abc::$babel->getFormattedDate(CoreBabel::FORMAT_LONG, 19660410);
+    self::assertSame('10 april 1966', $formatted, 'long');
+
+    $formatted = Abc::$babel->getFormattedDate(CoreBabel::FORMAT_MEDIUM, 19660410);
+    self::assertSame('10 apr 1966', $formatted, 'medium');
+
+    $formatted = Abc::$babel->getFormattedDate(CoreBabel::FORMAT_SHORT, 19660410);
     self::assertSame('10-04-1966', $formatted, 'short');
 
     Abc::$babel->popLanguage();

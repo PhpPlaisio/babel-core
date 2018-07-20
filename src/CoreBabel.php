@@ -112,6 +112,10 @@ class CoreBabel implements Babel
         $formatted = strftime($format, strtotime($date));
         break;
 
+      case is_int($date):
+        $formatted = strftime($format, strtotime((string)$date));
+        break;
+
       case is_a($date, '\DateTimeInterface'):
         $formatted = strftime($format, $date->getTimestamp());
         break;
