@@ -26,7 +26,7 @@ class CoreBabelTest extends TestCase
   /**
    * Creates the concrete implementation of the ABC Framework.
    */
-  public static function setUpBeforeClass()
+  public static function setUpBeforeClass(): void
   {
     parent::setUpBeforeClass();
 
@@ -37,7 +37,7 @@ class CoreBabelTest extends TestCase
   /**
    * Test cases for method getFormattedDate with language en-US and date given as a string.
    */
-  public function testGetFormattedDate1a()
+  public function testGetFormattedDate1a(): void
   {
     $formatted = Abc::$babel->getFormattedDate(CoreBabel::FORMAT_FULL, '1966-04-10');
     self::assertSame('Sunday, April 10, 1966', $formatted, 'full');
@@ -56,7 +56,7 @@ class CoreBabelTest extends TestCase
   /**
    * Test cases for method getFormattedDate with language en-US and date given as a DateTime object.
    */
-  public function testGetFormattedDate1b()
+  public function testGetFormattedDate1b(): void
   {
     $formatted = Abc::$babel->getFormattedDate(CoreBabel::FORMAT_FULL, new \DateTime('1966-04-10'));
     self::assertSame('Sunday, April 10, 1966', $formatted, 'full');
@@ -75,7 +75,7 @@ class CoreBabelTest extends TestCase
   /**
    * Test cases for method getFormattedDate with language en-US and date given as an int.
    */
-  public function testGetFormattedDate1c()
+  public function testGetFormattedDate1c(): void
   {
     $formatted = Abc::$babel->getFormattedDate(CoreBabel::FORMAT_FULL, 19660410);
     self::assertSame('Sunday, April 10, 1966', $formatted, 'full');
@@ -94,20 +94,20 @@ class CoreBabelTest extends TestCase
   /**
    * Test cases for method getFormattedDate with language en-US and empty dates.
    */
-  public function testGetFormattedDate1d()
+  public function testGetFormattedDate1d(): void
   {
     $formatted = Abc::$babel->getFormattedDate(CoreBabel::FORMAT_FULL, '');
     self::assertSame('', $formatted, 'empty');
 
     $formatted = Abc::$babel->getFormattedDate(CoreBabel::FORMAT_FULL, null);
-    self::assertSame('', $formatted, null);
+    self::assertSame('', $formatted, 'null');
   }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Test cases for method getFormattedDate with language nl-NL and date given as a string..
    */
-  public function testGetFormattedDate2a()
+  public function testGetFormattedDate2a(): void
   {
     Abc::$babel->pushLanguage(C::LAN_ID_NL);
 
@@ -130,7 +130,7 @@ class CoreBabelTest extends TestCase
   /**
    * Test cases for method getFormattedDate with language nl-NL and date given as an object.
    */
-  public function testGetFormattedDate2b()
+  public function testGetFormattedDate2b(): void
   {
     Abc::$babel->pushLanguage(C::LAN_ID_NL);
 
@@ -153,7 +153,7 @@ class CoreBabelTest extends TestCase
   /**
    * Test cases for method getFormattedDate with language nl-NL and date given as an int.
    */
-  public function testGetFormattedDate2c()
+  public function testGetFormattedDate2c(): void
   {
     Abc::$babel->pushLanguage(C::LAN_ID_NL);
 
@@ -176,7 +176,7 @@ class CoreBabelTest extends TestCase
   /**
    * Test cases for method Babel:getHtmlText.
    */
-  public function testGetHtmlText1()
+  public function testGetHtmlText1(): void
   {
     $text = Abc::$babel->getHtmlText(C::TXT_ID_HELLO_TEXT);
     self::assertSame('Hello Text', $text, 'TXT_ID_HELLO_TEXT');
@@ -189,7 +189,7 @@ class CoreBabelTest extends TestCase
   /**
    * Test cases for method Babel:getHtmlTextFormatted.
    */
-  public function testGetHtmlTextFormatted1()
+  public function testGetHtmlTextFormatted1(): void
   {
     $text = Abc::$babel->getHtmlTextFormatted(C::TXT_ID_FORMATTED1, true, true, ['Hello<br/>World']);
     self::assertSame('<a href="/">Hello<br/>World</a>', $text, 'TXT_ID_FORMATTED1 true true');
@@ -208,7 +208,7 @@ class CoreBabelTest extends TestCase
   /**
    * Test cases for method Babel:getHtmlTextReplaced.
    */
-  public function testGetHtmlTextReplaced1()
+  public function testGetHtmlTextReplaced1(): void
   {
     $text = Abc::$babel->getHtmlTextReplaced(C::TXT_ID_REPLACED1, true, true, ['@TEXT@' => 'Hello<br/>World']);
     self::assertSame('<a href="/">Hello<br/>World</a>', $text, 'TXT_ID_REPLACED1 true true');
@@ -227,7 +227,7 @@ class CoreBabelTest extends TestCase
   /**
    * Test cases for method Babel:getHtmlWord.
    */
-  public function testGetHtmlWord1()
+  public function testGetHtmlWord1(): void
   {
     $word = Abc::$babel->getHtmlWord(C::WRD_ID_HELLO_WORD);
     self::assertSame('Hello Word', $word, 'WRD_ID_HELLO_WORD');
@@ -240,7 +240,7 @@ class CoreBabelTest extends TestCase
   /**
    * Test cases for method getInternalLanguageMap.
    */
-  public function testGetInternalLanguageMap()
+  public function testGetInternalLanguageMap(): void
   {
     $map = Abc::$babel->getInternalLanguageMap();
     self::assertSame(4, sizeof($map));
@@ -254,7 +254,7 @@ class CoreBabelTest extends TestCase
   /**
    * Test cases for method Babel:getText.
    */
-  public function testGetText1()
+  public function testGetText1(): void
   {
     $text = Abc::$babel->getText(C::TXT_ID_HELLO_TEXT);
     self::assertSame('Hello Text', $text, 'TXT_ID_HELLO_TEXT');
@@ -267,7 +267,7 @@ class CoreBabelTest extends TestCase
   /**
    * Test cases for method Babel:getWord.
    */
-  public function testGetWord1()
+  public function testGetWord1(): void
   {
     $word = Abc::$babel->getWord(C::WRD_ID_HELLO_WORD);
     self::assertSame('Hello Word', $word, 'WRD_ID_HELLO_WORD');
@@ -280,7 +280,7 @@ class CoreBabelTest extends TestCase
   /**
    * Test cases for methods Babel::popLanguage and Babel::pushLanguage.
    */
-  public function testLanguageStack()
+  public function testLanguageStack(): void
   {
     self::assertEquals(C::LAN_ID_EN, Abc::$babel->getLanId());
     self::assertEquals('ltr', Abc::$babel->getDir());
@@ -345,7 +345,7 @@ class CoreBabelTest extends TestCase
   /**
    * Connects to the MySQL server and cleans the BLOB tables.
    */
-  protected function setUp()
+  protected function setUp(): void
   {
     Abc::$DL->connect('localhost', 'test', 'test', 'test');
     Abc::$DL->begin();
@@ -356,7 +356,7 @@ class CoreBabelTest extends TestCase
   /**
    * Disconnects from the MySQL server.
    */
-  protected function tearDown()
+  protected function tearDown(): void
   {
     Abc::$DL->commit();
     Abc::$DL->disconnect();
