@@ -1,21 +1,20 @@
 build:
-    dependencies:
-        before:
-            - sudo locale-gen en_US
-            - sudo locale-gen en_US.utf8
-            - sudo locale-gen nl_NL
-            - sudo locale-gen nl_NL.utf8
-            - sudo locale-gen nl_BE
-            - sudo locale-gen nl_BE.utf8
+  dependencies:
+    before:
+      - sudo locale-gen en_US
+      - sudo locale-gen en_US.utf8
+      - sudo locale-gen nl_NL
+      - sudo locale-gen nl_NL.utf8
+      - sudo locale-gen nl_BE
+      - sudo locale-gen nl_BE.utf8
 
-    environment:
-        mysql: 5.7
+  environment:
+    mysql: 5.7
 
-    tests:
-        override:
-            -
-                command: './bin/phing unit'
-                coverage:
-                    file: 'test/coverage.xml'
-                    format: 'php-clover'
+  tests:
+    override:
+      - command: './bin/phing unit'
+        coverage:
+          file:   'test/coverage.xml'
+          format: 'php-clover'
 

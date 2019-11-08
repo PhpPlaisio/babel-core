@@ -6,21 +6,20 @@
     "Babel",
     "Core"
   ],
+  "license": "MIT",
   "require": {
     "php": ">=7.1.0",
-    "setbased/abc": "*",
-    "setbased/abc-babel": "*",
-    "setbased/abc-html": "^1.0.0 || ^2.0.0",
-    "setbased/exception": "^1.1.0"
+    "setbased/abc": "^0.10.0",
+    "setbased/abc-babel": "^0.10.0",
+    "setbased/abc-html": "^2.0.0",
+    "setbased/exception": "^2.0.0"
   },
   "require-dev": {
     "phing/phing": "^2.0.0",
     "phpunit/phpunit": "^7.0.0 || ^8.0.0",
-    "setbased/php-stratum": "^4.0.0",
+    "setbased/php-stratum": "^5.0.0",
     "setbased/php-stratum-mysql": "^4.0.0"
   },
-  "type": "library",
-  "license": "MIT",
   "autoload": {
     "psr-4": {
       "SetBased\\Abc\\Babel\\": "src/"
