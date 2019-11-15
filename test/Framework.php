@@ -1,15 +1,15 @@
 <?php
 declare(strict_types=1);
 
-namespace SetBased\Abc\Babel\Test;
+namespace Plaisio\Babel\Test;
 
-use SetBased\Abc\Abc;
-use SetBased\Abc\Babel\CoreBabel;
+use Plaisio\Babel\CoreBabel;
+use Plaisio\Kernel\Nub;
 
 /**
  * Mock framework for testing purposes.
  */
-class Framework extends Abc
+class Framework extends Nub
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**

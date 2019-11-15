@@ -1,12 +1,12 @@
 <?php
 declare(strict_types=1);
 
-namespace SetBased\Abc\Babel\Test;
+namespace Plaisio\Babel\Test;
 
 use PHPUnit\Framework\TestCase;
-use SetBased\Abc\Abc;
-use SetBased\Abc\Babel\CoreBabel;
-use SetBased\Abc\C;
+use Plaisio\Babel\CoreBabel;
+use Plaisio\C;
+use Plaisio\Kernel\Nub;
 
 /**
  * Test cases for class CoreBabel.
@@ -15,14 +15,13 @@ class CoreBabelTest extends TestCase
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Our concrete instance of Abc.
+   * Our concrete instance of Kernel.
    *
-   * @var Abc
+   * @var Nub
    */
-  private static $abc;
+  private static $nub;
 
   //--------------------------------------------------------------------------------------------------------------------
-
   /**
    * Creates the concrete implementation of the ABC Framework.
    */
@@ -30,7 +29,7 @@ class CoreBabelTest extends TestCase
   {
     parent::setUpBeforeClass();
 
-    self::$abc = new Framework();
+    self::$nub = new Framework();
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -39,16 +38,16 @@ class CoreBabelTest extends TestCase
    */
   public function testGetFormattedDate1a(): void
   {
-    $formatted = Abc::$babel->getFormattedDate(CoreBabel::FORMAT_FULL, '1966-04-10');
+    $formatted = Nub::$babel->getFormattedDate(CoreBabel::FORMAT_FULL, '1966-04-10');
     self::assertSame('Sunday, April 10, 1966', $formatted, 'full');
 
-    $formatted = Abc::$babel->getFormattedDate(CoreBabel::FORMAT_LONG, '1966-04-10');
+    $formatted = Nub::$babel->getFormattedDate(CoreBabel::FORMAT_LONG, '1966-04-10');
     self::assertSame('April 10, 1966', $formatted, 'long');
 
-    $formatted = Abc::$babel->getFormattedDate(CoreBabel::FORMAT_MEDIUM, '1966-04-10');
+    $formatted = Nub::$babel->getFormattedDate(CoreBabel::FORMAT_MEDIUM, '1966-04-10');
     self::assertSame('Apr 10, 1966', $formatted, 'medium');
 
-    $formatted = Abc::$babel->getFormattedDate(CoreBabel::FORMAT_SHORT, '1966-04-10');
+    $formatted = Nub::$babel->getFormattedDate(CoreBabel::FORMAT_SHORT, '1966-04-10');
     self::assertSame('04/10/1966', $formatted, 'short');
   }
 
@@ -58,16 +57,16 @@ class CoreBabelTest extends TestCase
    */
   public function testGetFormattedDate1b(): void
   {
-    $formatted = Abc::$babel->getFormattedDate(CoreBabel::FORMAT_FULL, new \DateTime('1966-04-10'));
+    $formatted = Nub::$babel->getFormattedDate(CoreBabel::FORMAT_FULL, new \DateTime('1966-04-10'));
     self::assertSame('Sunday, April 10, 1966', $formatted, 'full');
 
-    $formatted = Abc::$babel->getFormattedDate(CoreBabel::FORMAT_LONG, new \DateTimeImmutable('1966-04-10'));
+    $formatted = Nub::$babel->getFormattedDate(CoreBabel::FORMAT_LONG, new \DateTimeImmutable('1966-04-10'));
     self::assertSame('April 10, 1966', $formatted, 'long');
 
-    $formatted = Abc::$babel->getFormattedDate(CoreBabel::FORMAT_MEDIUM, new \DateTime('1966-04-10'));
+    $formatted = Nub::$babel->getFormattedDate(CoreBabel::FORMAT_MEDIUM, new \DateTime('1966-04-10'));
     self::assertSame('Apr 10, 1966', $formatted, 'medium');
 
-    $formatted = Abc::$babel->getFormattedDate(CoreBabel::FORMAT_SHORT, new \DateTimeImmutable('1966-04-10'));
+    $formatted = Nub::$babel->getFormattedDate(CoreBabel::FORMAT_SHORT, new \DateTimeImmutable('1966-04-10'));
     self::assertSame('04/10/1966', $formatted, 'short');
   }
 
@@ -77,16 +76,16 @@ class CoreBabelTest extends TestCase
    */
   public function testGetFormattedDate1c(): void
   {
-    $formatted = Abc::$babel->getFormattedDate(CoreBabel::FORMAT_FULL, 19660410);
+    $formatted = Nub::$babel->getFormattedDate(CoreBabel::FORMAT_FULL, 19660410);
     self::assertSame('Sunday, April 10, 1966', $formatted, 'full');
 
-    $formatted = Abc::$babel->getFormattedDate(CoreBabel::FORMAT_LONG, 19660410);
+    $formatted = Nub::$babel->getFormattedDate(CoreBabel::FORMAT_LONG, 19660410);
     self::assertSame('April 10, 1966', $formatted, 'long');
 
-    $formatted = Abc::$babel->getFormattedDate(CoreBabel::FORMAT_MEDIUM, 19660410);
+    $formatted = Nub::$babel->getFormattedDate(CoreBabel::FORMAT_MEDIUM, 19660410);
     self::assertSame('Apr 10, 1966', $formatted, 'medium');
 
-    $formatted = Abc::$babel->getFormattedDate(CoreBabel::FORMAT_SHORT, 19660410);
+    $formatted = Nub::$babel->getFormattedDate(CoreBabel::FORMAT_SHORT, 19660410);
     self::assertSame('04/10/1966', $formatted, 'short');
   }
 
@@ -96,10 +95,10 @@ class CoreBabelTest extends TestCase
    */
   public function testGetFormattedDate1d(): void
   {
-    $formatted = Abc::$babel->getFormattedDate(CoreBabel::FORMAT_FULL, '');
+    $formatted = Nub::$babel->getFormattedDate(CoreBabel::FORMAT_FULL, '');
     self::assertSame('', $formatted, 'empty');
 
-    $formatted = Abc::$babel->getFormattedDate(CoreBabel::FORMAT_FULL, null);
+    $formatted = Nub::$babel->getFormattedDate(CoreBabel::FORMAT_FULL, null);
     self::assertSame('', $formatted, 'null');
   }
 
@@ -109,21 +108,21 @@ class CoreBabelTest extends TestCase
    */
   public function testGetFormattedDate2a(): void
   {
-    Abc::$babel->pushLanguage(C::LAN_ID_NL);
+    Nub::$babel->pushLanguage(C::LAN_ID_NL);
 
-    $formatted = Abc::$babel->getFormattedDate(CoreBabel::FORMAT_FULL, '1966-04-10');
+    $formatted = Nub::$babel->getFormattedDate(CoreBabel::FORMAT_FULL, '1966-04-10');
     self::assertSame('zondag 10 april 1966', $formatted, 'full');
 
-    $formatted = Abc::$babel->getFormattedDate(CoreBabel::FORMAT_LONG, '1966-04-10');
+    $formatted = Nub::$babel->getFormattedDate(CoreBabel::FORMAT_LONG, '1966-04-10');
     self::assertSame('10 april 1966', $formatted, 'long');
 
-    $formatted = Abc::$babel->getFormattedDate(CoreBabel::FORMAT_MEDIUM, '1966-04-10');
+    $formatted = Nub::$babel->getFormattedDate(CoreBabel::FORMAT_MEDIUM, '1966-04-10');
     self::assertSame('10 apr 1966', $formatted, 'medium');
 
-    $formatted = Abc::$babel->getFormattedDate(CoreBabel::FORMAT_SHORT, '1966-04-10');
+    $formatted = Nub::$babel->getFormattedDate(CoreBabel::FORMAT_SHORT, '1966-04-10');
     self::assertSame('10-04-1966', $formatted, 'short');
 
-    Abc::$babel->popLanguage();
+    Nub::$babel->popLanguage();
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -132,21 +131,21 @@ class CoreBabelTest extends TestCase
    */
   public function testGetFormattedDate2b(): void
   {
-    Abc::$babel->pushLanguage(C::LAN_ID_NL);
+    Nub::$babel->pushLanguage(C::LAN_ID_NL);
 
-    $formatted = Abc::$babel->getFormattedDate(CoreBabel::FORMAT_FULL, new \DateTimeImmutable('1966-04-10'));
+    $formatted = Nub::$babel->getFormattedDate(CoreBabel::FORMAT_FULL, new \DateTimeImmutable('1966-04-10'));
     self::assertSame('zondag 10 april 1966', $formatted, 'full');
 
-    $formatted = Abc::$babel->getFormattedDate(CoreBabel::FORMAT_LONG, new \DateTime('1966-04-10'));
+    $formatted = Nub::$babel->getFormattedDate(CoreBabel::FORMAT_LONG, new \DateTime('1966-04-10'));
     self::assertSame('10 april 1966', $formatted, 'long');
 
-    $formatted = Abc::$babel->getFormattedDate(CoreBabel::FORMAT_MEDIUM, new \DateTimeImmutable('1966-04-10'));
+    $formatted = Nub::$babel->getFormattedDate(CoreBabel::FORMAT_MEDIUM, new \DateTimeImmutable('1966-04-10'));
     self::assertSame('10 apr 1966', $formatted, 'medium');
 
-    $formatted = Abc::$babel->getFormattedDate(CoreBabel::FORMAT_SHORT, new \DateTime('1966-04-10'));
+    $formatted = Nub::$babel->getFormattedDate(CoreBabel::FORMAT_SHORT, new \DateTime('1966-04-10'));
     self::assertSame('10-04-1966', $formatted, 'short');
 
-    Abc::$babel->popLanguage();
+    Nub::$babel->popLanguage();
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -155,21 +154,21 @@ class CoreBabelTest extends TestCase
    */
   public function testGetFormattedDate2c(): void
   {
-    Abc::$babel->pushLanguage(C::LAN_ID_NL);
+    Nub::$babel->pushLanguage(C::LAN_ID_NL);
 
-    $formatted = Abc::$babel->getFormattedDate(CoreBabel::FORMAT_FULL, 19660410);
+    $formatted = Nub::$babel->getFormattedDate(CoreBabel::FORMAT_FULL, 19660410);
     self::assertSame('zondag 10 april 1966', $formatted, 'full');
 
-    $formatted = Abc::$babel->getFormattedDate(CoreBabel::FORMAT_LONG, 19660410);
+    $formatted = Nub::$babel->getFormattedDate(CoreBabel::FORMAT_LONG, 19660410);
     self::assertSame('10 april 1966', $formatted, 'long');
 
-    $formatted = Abc::$babel->getFormattedDate(CoreBabel::FORMAT_MEDIUM, 19660410);
+    $formatted = Nub::$babel->getFormattedDate(CoreBabel::FORMAT_MEDIUM, 19660410);
     self::assertSame('10 apr 1966', $formatted, 'medium');
 
-    $formatted = Abc::$babel->getFormattedDate(CoreBabel::FORMAT_SHORT, 19660410);
+    $formatted = Nub::$babel->getFormattedDate(CoreBabel::FORMAT_SHORT, 19660410);
     self::assertSame('10-04-1966', $formatted, 'short');
 
-    Abc::$babel->popLanguage();
+    Nub::$babel->popLanguage();
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -178,10 +177,10 @@ class CoreBabelTest extends TestCase
    */
   public function testGetHtmlText1(): void
   {
-    $text = Abc::$babel->getHtmlText(C::TXT_ID_HELLO_TEXT);
+    $text = Nub::$babel->getHtmlText(C::TXT_ID_HELLO_TEXT);
     self::assertSame('Hello Text', $text, 'TXT_ID_HELLO_TEXT');
 
-    $text = Abc::$babel->getHtmlText(C::TXT_ID_HELLO_TEXT_SPECIAL);
+    $text = Nub::$babel->getHtmlText(C::TXT_ID_HELLO_TEXT_SPECIAL);
     self::assertSame('&lt;Hello Text&gt;', $text, 'TXT_ID_HELLO_TEXT_SPECIAL');
   }
 
@@ -191,16 +190,16 @@ class CoreBabelTest extends TestCase
    */
   public function testGetHtmlTextFormatted1(): void
   {
-    $text = Abc::$babel->getHtmlTextFormatted(C::TXT_ID_FORMATTED1, true, true, ['Hello<br/>World']);
+    $text = Nub::$babel->getHtmlTextFormatted(C::TXT_ID_FORMATTED1, true, true, ['Hello<br/>World']);
     self::assertSame('<a href="/">Hello<br/>World</a>', $text, 'TXT_ID_FORMATTED1 true true');
 
-    $text = Abc::$babel->getHtmlTextFormatted(C::TXT_ID_FORMATTED1, true, false, ['Hello<br/>World']);
+    $text = Nub::$babel->getHtmlTextFormatted(C::TXT_ID_FORMATTED1, true, false, ['Hello<br/>World']);
     self::assertSame('<a href="/">Hello&lt;br/&gt;World</a>', $text, 'TXT_ID_FORMATTED1 true false');
 
-    $text = Abc::$babel->getHtmlTextFormatted(C::TXT_ID_FORMATTED1, false, false, ['Hello<br/>World']);
+    $text = Nub::$babel->getHtmlTextFormatted(C::TXT_ID_FORMATTED1, false, false, ['Hello<br/>World']);
     self::assertSame('&lt;a href=&quot;/&quot;&gt;Hello&lt;br/&gt;World&lt;/a&gt;', $text, 'TXT_ID_FORMATTED1 false false');
 
-    $text = Abc::$babel->getHtmlTextFormatted(C::TXT_ID_FORMATTED1, false, true, ['Hello<br/>World']);
+    $text = Nub::$babel->getHtmlTextFormatted(C::TXT_ID_FORMATTED1, false, true, ['Hello<br/>World']);
     self::assertSame('&lt;a href=&quot;/&quot;&gt;Hello<br/>World&lt;/a&gt;', $text, 'TXT_ID_FORMATTED1 false true');
   }
 
@@ -210,16 +209,16 @@ class CoreBabelTest extends TestCase
    */
   public function testGetHtmlTextReplaced1(): void
   {
-    $text = Abc::$babel->getHtmlTextReplaced(C::TXT_ID_REPLACED1, true, true, ['@TEXT@' => 'Hello<br/>World']);
+    $text = Nub::$babel->getHtmlTextReplaced(C::TXT_ID_REPLACED1, true, true, ['@TEXT@' => 'Hello<br/>World']);
     self::assertSame('<a href="/">Hello<br/>World</a>', $text, 'TXT_ID_REPLACED1 true true');
 
-    $text = Abc::$babel->getHtmlTextReplaced(C::TXT_ID_REPLACED1, true, false, ['@TEXT@' => 'Hello<br/>World']);
+    $text = Nub::$babel->getHtmlTextReplaced(C::TXT_ID_REPLACED1, true, false, ['@TEXT@' => 'Hello<br/>World']);
     self::assertSame('<a href="/">Hello&lt;br/&gt;World</a>', $text, 'TXT_ID_REPLACED1 true false');
 
-    $text = Abc::$babel->getHtmlTextReplaced(C::TXT_ID_REPLACED1, false, false, ['@TEXT@' => 'Hello<br/>World']);
+    $text = Nub::$babel->getHtmlTextReplaced(C::TXT_ID_REPLACED1, false, false, ['@TEXT@' => 'Hello<br/>World']);
     self::assertSame('&lt;a href=&quot;/&quot;&gt;Hello&lt;br/&gt;World&lt;/a&gt;', $text, 'TXT_ID_REPLACED1 false false');
 
-    $text = Abc::$babel->getHtmlTextReplaced(C::TXT_ID_REPLACED1, false, true, ['@TEXT@' => 'Hello<br/>World']);
+    $text = Nub::$babel->getHtmlTextReplaced(C::TXT_ID_REPLACED1, false, true, ['@TEXT@' => 'Hello<br/>World']);
     self::assertSame('&lt;a href=&quot;/&quot;&gt;Hello<br/>World&lt;/a&gt;', $text, 'TXT_ID_REPLACED1 false true');
   }
 
@@ -229,10 +228,10 @@ class CoreBabelTest extends TestCase
    */
   public function testGetHtmlWord1(): void
   {
-    $word = Abc::$babel->getHtmlWord(C::WRD_ID_HELLO_WORD);
+    $word = Nub::$babel->getHtmlWord(C::WRD_ID_HELLO_WORD);
     self::assertSame('Hello Word', $word, 'WRD_ID_HELLO_WORD');
 
-    $word = Abc::$babel->getHtmlWord(C::WRD_ID_HELLO_WORD_SPECIAL);
+    $word = Nub::$babel->getHtmlWord(C::WRD_ID_HELLO_WORD_SPECIAL);
     self::assertSame('&lt;Hello Word&gt;', $word, 'WRD_ID_HELLO_WORD_SPECIAL');
   }
 
@@ -242,7 +241,7 @@ class CoreBabelTest extends TestCase
    */
   public function testGetInternalLanguageMap(): void
   {
-    $map = Abc::$babel->getInternalLanguageMap();
+    $map = Nub::$babel->getInternalLanguageMap();
     self::assertSame(4, sizeof($map));
     self::assertEquals(1, $map['en']);
     self::assertEquals(2, $map['nl']);
@@ -256,10 +255,10 @@ class CoreBabelTest extends TestCase
    */
   public function testGetText1(): void
   {
-    $text = Abc::$babel->getText(C::TXT_ID_HELLO_TEXT);
+    $text = Nub::$babel->getText(C::TXT_ID_HELLO_TEXT);
     self::assertSame('Hello Text', $text, 'TXT_ID_HELLO_TEXT');
 
-    $text = Abc::$babel->getText(C::TXT_ID_HELLO_TEXT_SPECIAL);
+    $text = Nub::$babel->getText(C::TXT_ID_HELLO_TEXT_SPECIAL);
     self::assertSame('<Hello Text>', $text, 'TXT_ID_HELLO_TEXT_SPECIAL');
   }
 
@@ -269,10 +268,10 @@ class CoreBabelTest extends TestCase
    */
   public function testGetWord1(): void
   {
-    $word = Abc::$babel->getWord(C::WRD_ID_HELLO_WORD);
+    $word = Nub::$babel->getWord(C::WRD_ID_HELLO_WORD);
     self::assertSame('Hello Word', $word, 'WRD_ID_HELLO_WORD');
 
-    $word = Abc::$babel->getWord(C::WRD_ID_HELLO_WORD_SPECIAL);
+    $word = Nub::$babel->getWord(C::WRD_ID_HELLO_WORD_SPECIAL);
     self::assertSame('<Hello Word>', $word, 'WRD_ID_HELLO_WORD_SPECIAL');
   }
 
@@ -282,63 +281,63 @@ class CoreBabelTest extends TestCase
    */
   public function testLanguageStack(): void
   {
-    self::assertEquals(C::LAN_ID_EN, Abc::$babel->getLanId());
-    self::assertEquals('ltr', Abc::$babel->getDir());
-    self::assertEquals('en', Abc::$babel->getInternalCode());
-    self::assertEquals('en', Abc::$babel->getLang());
-    self::assertEquals('en_US.utf8', Abc::$babel->getLocale());
+    self::assertEquals(C::LAN_ID_EN, Nub::$babel->getLanId());
+    self::assertEquals('ltr', Nub::$babel->getDir());
+    self::assertEquals('en', Nub::$babel->getInternalCode());
+    self::assertEquals('en', Nub::$babel->getLang());
+    self::assertEquals('en_US.utf8', Nub::$babel->getLocale());
 
-    Abc::$babel->pushLanguage(C::LAN_ID_EN);
-    self::assertEquals(C::LAN_ID_EN, Abc::$babel->getLanId(), 'Push 1');
-    self::assertEquals('en', Abc::$babel->getInternalCode());
-    self::assertEquals('en', Abc::$babel->getLang());
-    self::assertEquals('en_US.utf8', Abc::$babel->getLocale());
+    Nub::$babel->pushLanguage(C::LAN_ID_EN);
+    self::assertEquals(C::LAN_ID_EN, Nub::$babel->getLanId(), 'Push 1');
+    self::assertEquals('en', Nub::$babel->getInternalCode());
+    self::assertEquals('en', Nub::$babel->getLang());
+    self::assertEquals('en_US.utf8', Nub::$babel->getLocale());
 
-    Abc::$babel->pushLanguage(C::LAN_ID_RU);
-    self::assertEquals(C::LAN_ID_RU, Abc::$babel->getLanId(), 'Push 2');
-    self::assertEquals('ru', Abc::$babel->getInternalCode());
-    self::assertEquals('ru', Abc::$babel->getLang());
-    self::assertEquals('ru_RU.utf8', Abc::$babel->getLocale());
+    Nub::$babel->pushLanguage(C::LAN_ID_RU);
+    self::assertEquals(C::LAN_ID_RU, Nub::$babel->getLanId(), 'Push 2');
+    self::assertEquals('ru', Nub::$babel->getInternalCode());
+    self::assertEquals('ru', Nub::$babel->getLang());
+    self::assertEquals('ru_RU.utf8', Nub::$babel->getLocale());
 
-    Abc::$babel->pushLanguage(C::LAN_ID_NL);
-    self::assertEquals(C::LAN_ID_NL, Abc::$babel->getLanId(), 'Push 3');
-    self::assertEquals('nl', Abc::$babel->getInternalCode());
-    self::assertEquals('nl', Abc::$babel->getLang());
-    self::assertEquals('nl_NL.utf8', Abc::$babel->getLocale());
+    Nub::$babel->pushLanguage(C::LAN_ID_NL);
+    self::assertEquals(C::LAN_ID_NL, Nub::$babel->getLanId(), 'Push 3');
+    self::assertEquals('nl', Nub::$babel->getInternalCode());
+    self::assertEquals('nl', Nub::$babel->getLang());
+    self::assertEquals('nl_NL.utf8', Nub::$babel->getLocale());
 
-    Abc::$babel->pushLanguage(C::LAN_ID_NL_BE);
-    self::assertEquals(C::LAN_ID_NL_BE, Abc::$babel->getLanId(), 'Push 4');
-    self::assertEquals('nl-be', Abc::$babel->getInternalCode());
-    self::assertEquals('nl', Abc::$babel->getLang());
-    self::assertEquals('nl_BE.utf8', Abc::$babel->getLocale());
+    Nub::$babel->pushLanguage(C::LAN_ID_NL_BE);
+    self::assertEquals(C::LAN_ID_NL_BE, Nub::$babel->getLanId(), 'Push 4');
+    self::assertEquals('nl-be', Nub::$babel->getInternalCode());
+    self::assertEquals('nl', Nub::$babel->getLang());
+    self::assertEquals('nl_BE.utf8', Nub::$babel->getLocale());
 
-    Abc::$babel->popLanguage();
-    self::assertEquals(C::LAN_ID_NL, Abc::$babel->getLanId(), 'Pop 4');
-    self::assertEquals('ltr', Abc::$babel->getDir());
-    self::assertEquals('nl', Abc::$babel->getInternalCode());
-    self::assertEquals('nl', Abc::$babel->getLang());
-    self::assertEquals('nl_NL.utf8', Abc::$babel->getLocale());
+    Nub::$babel->popLanguage();
+    self::assertEquals(C::LAN_ID_NL, Nub::$babel->getLanId(), 'Pop 4');
+    self::assertEquals('ltr', Nub::$babel->getDir());
+    self::assertEquals('nl', Nub::$babel->getInternalCode());
+    self::assertEquals('nl', Nub::$babel->getLang());
+    self::assertEquals('nl_NL.utf8', Nub::$babel->getLocale());
 
-    Abc::$babel->popLanguage();
-    self::assertEquals(C::LAN_ID_RU, Abc::$babel->getLanId(), 'Pop 3');
-    self::assertEquals('ltr', Abc::$babel->getDir());
-    self::assertEquals('ru', Abc::$babel->getInternalCode());
-    self::assertEquals('ru', Abc::$babel->getLang());
-    self::assertEquals('ru_RU.utf8', Abc::$babel->getLocale());
+    Nub::$babel->popLanguage();
+    self::assertEquals(C::LAN_ID_RU, Nub::$babel->getLanId(), 'Pop 3');
+    self::assertEquals('ltr', Nub::$babel->getDir());
+    self::assertEquals('ru', Nub::$babel->getInternalCode());
+    self::assertEquals('ru', Nub::$babel->getLang());
+    self::assertEquals('ru_RU.utf8', Nub::$babel->getLocale());
 
-    Abc::$babel->popLanguage();
-    self::assertEquals(C::LAN_ID_EN, Abc::$babel->getLanId(), 'Pop 2');
-    self::assertEquals('ltr', Abc::$babel->getDir());
-    self::assertEquals('en', Abc::$babel->getInternalCode());
-    self::assertEquals('en', Abc::$babel->getLang());
-    self::assertEquals('en_US.utf8', Abc::$babel->getLocale());
+    Nub::$babel->popLanguage();
+    self::assertEquals(C::LAN_ID_EN, Nub::$babel->getLanId(), 'Pop 2');
+    self::assertEquals('ltr', Nub::$babel->getDir());
+    self::assertEquals('en', Nub::$babel->getInternalCode());
+    self::assertEquals('en', Nub::$babel->getLang());
+    self::assertEquals('en_US.utf8', Nub::$babel->getLocale());
 
-    Abc::$babel->popLanguage();
-    self::assertEquals(C::LAN_ID_EN, Abc::$babel->getLanId(), 'Pop 1');
-    self::assertEquals('ltr', Abc::$babel->getDir());
-    self::assertEquals('en', Abc::$babel->getInternalCode());
-    self::assertEquals('en', Abc::$babel->getLang());
-    self::assertEquals('en_US.utf8', Abc::$babel->getLocale());
+    Nub::$babel->popLanguage();
+    self::assertEquals(C::LAN_ID_EN, Nub::$babel->getLanId(), 'Pop 1');
+    self::assertEquals('ltr', Nub::$babel->getDir());
+    self::assertEquals('en', Nub::$babel->getInternalCode());
+    self::assertEquals('en', Nub::$babel->getLang());
+    self::assertEquals('en_US.utf8', Nub::$babel->getLocale());
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -347,9 +346,9 @@ class CoreBabelTest extends TestCase
    */
   protected function setUp(): void
   {
-    Abc::$DL->connect('localhost', 'test', 'test', 'test');
-    Abc::$DL->begin();
-    Abc::$babel->setLanguage(C::LAN_ID_EN);
+    Nub::$DL->connect('localhost', 'test', 'test', 'test');
+    Nub::$DL->begin();
+    Nub::$babel->setLanguage(C::LAN_ID_EN);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -358,8 +357,8 @@ class CoreBabelTest extends TestCase
    */
   protected function tearDown(): void
   {
-    Abc::$DL->commit();
-    Abc::$DL->disconnect();
+    Nub::$DL->commit();
+    Nub::$DL->disconnect();
   }
 
   //--------------------------------------------------------------------------------------------------------------------

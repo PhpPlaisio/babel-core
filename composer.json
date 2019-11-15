@@ -1,20 +1,21 @@
 {
-  "name": "setbased/abc-babel-core",
-  "description": "ABC-Framework: Core Babel",
+  "name": "plaisio/babel-core",
+  "description": "PhpPlaisio: Core Babel",
   "keywords": [
-    "ABC-Framework",
+    "PhpPlaisio",
     "Babel",
     "Core"
   ],
   "license": "MIT",
   "require": {
     "php": ">=7.1.0",
-    "setbased/abc": "^0.10.0",
-    "setbased/abc-babel": "^0.10.0",
-    "setbased/abc-html": "^2.0.0",
+    "plaisio/babel": "^1.0.0",
+    "plaisio/html": "^3.0.0",
+    "plaisio/kernel": "^1.0.0.",
     "setbased/exception": "^2.0.0"
   },
   "require-dev": {
+    "ext-mysqli": "*",
     "phing/phing": "^2.0.0",
     "phpunit/phpunit": "^7.0.0 || ^8.0.0",
     "setbased/php-stratum": "^5.0.0",
@@ -22,12 +23,12 @@
   },
   "autoload": {
     "psr-4": {
-      "SetBased\\Abc\\Babel\\": "src/"
+      "Plaisio\\Babel\\": "src/"
     }
   },
   "autoload-dev": {
     "psr-4": {
-      "SetBased\\Abc\\Babel\\Test\\": "test/"
+      "Plaisio\\Babel\\Test\\": "test/"
     },
     "classmap": [
       "test/C.php"

@@ -17,4 +17,3 @@ build:
         coverage:
           file:   'test/coverage.xml'
           format: 'php-clover'
-

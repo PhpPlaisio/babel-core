@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace SetBased\Abc;
+namespace Plaisio;
 
 /**
  * Constant class for testing purposes.
