@@ -1,7 +1,7 @@
 /*================================================================================*/
 /* DDL SCRIPT                                                                     */
 /*================================================================================*/
-/*  Title    : ABC Framework: Babel Core                                          */
+/*  Title    : PhpPlaisio: Babel Core                                             */
 /*  FileName : abc-babel-core.ecm                                                 */
 /*  Platform : MySQL 5                                                            */
 /*  Version  : Concept                                                            */
@@ -54,7 +54,7 @@ The ID of the word of the name of the language.
 
 /*
 COMMENT ON COLUMN `ABC_BABEL_LANGUAGE`.`lan_code`
-The language code for the ABC-Framework.
+The language code for the ABC-TestKernel.
 */
 
 /*
