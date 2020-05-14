@@ -5,22 +5,14 @@ namespace Plaisio\Babel\Test;
 
 use Plaisio\Babel\Babel;
 use Plaisio\Babel\CoreBabel;
-use Plaisio\Kernel\Nub;
+use Plaisio\PlaisioKernel;
+use SetBased\Stratum\MySql\MySqlDefaultConnector;
 
 /**
  * Kernel for testing purposes.
  */
-class TestKernel extends Nub
+class TestKernel extends PlaisioKernel
 {
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
-   * Object constructor.
-   */
-  public function __construct()
-  {
-    parent::__construct();
-  }
-
   //--------------------------------------------------------------------------------------------------------------------
   /**
    * Returns the helper object for retrieving linguistic entities.
@@ -29,7 +21,7 @@ class TestKernel extends Nub
    */
   protected function getBabel(): Babel
   {
-    return new CoreBabel();
+    return new CoreBabel($this);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -40,7 +32,9 @@ class TestKernel extends Nub
    */
   protected function getDL(): Object
   {
-    return new TestDataLayer();
+    $connector = new MySqlDefaultConnector('localhost', 'test', 'test', 'test');
+
+    return new TestDataLayer($connector);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

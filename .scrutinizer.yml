@@ -12,6 +12,8 @@ build:
     mysql: 5.7
 
   tests:
+    before:
+      - ./bin/phing kernel
     override:
       - command: './bin/phing unit'
         coverage:

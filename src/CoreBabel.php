@@ -4,14 +4,14 @@ declare(strict_types=1);
 namespace Plaisio\Babel;
 
 use Plaisio\Helper\Html;
-use Plaisio\Kernel\Nub;
+use Plaisio\PlaisioObject;
 use SetBased\Exception\FallenException;
 use SetBased\Exception\RuntimeException;
 
 /**
  * A concrete implementation of Babel that retrieves all linguistic entities from a database.
  */
-class CoreBabel implements Babel
+class CoreBabel extends PlaisioObject implements Babel
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -27,20 +27,6 @@ class CoreBabel implements Babel
    * @var array[]
    */
   private $stack = [];
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
-   * Returns the internal language code of the current language.
-   *
-   * @return string
-   *
-   * @since 1.0.0
-   * @api
-   */
-  public function getCode(): string
-  {
-    return $this->language['lan_code'];
-  }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -98,7 +84,7 @@ class CoreBabel implements Babel
         break;
 
       default:
-        throw new FallenException('dateType', $dateType);
+        throw new FallenException('dateType', $dateType); // @codeCoverageIgnore
     }
 
     $oldLocale = setlocale(LC_TIME, 0);
@@ -120,7 +106,7 @@ class CoreBabel implements Babel
         break;
 
       default:
-        throw new FallenException('type', gettype($date));
+        throw new FallenException('type', gettype($date)); // @codeCoverageIgnore
     }
 
     setlocale(LC_TIME, $oldLocale);
@@ -171,12 +157,12 @@ class CoreBabel implements Babel
         return Html::txt2Html($this->getTextFormatted($txtId, $args));
 
       case ($formatIsHtml===false && $argsAreHtml===true):
-        $text = Nub::$nub->DL->abcBabelCoreTextGetText($txtId, $this->language['lan_id']);
+        $text = $this->nub->DL->abcBabelCoreTextGetText($txtId, $this->lanId);
 
         return vsprintf(Html::txt2Html($text), $args);
 
       case ($formatIsHtml===true && $argsAreHtml===false):
-        $text = Nub::$nub->DL->abcBabelCoreTextGetText($txtId, $this->language['lan_id']);
+        $text = $this->nub->DL->abcBabelCoreTextGetText($txtId, $this->lanId);
 
         $tmp = [];
         foreach ($args as $arg)
@@ -190,7 +176,7 @@ class CoreBabel implements Babel
         return $this->getTextFormatted($txtId, $args);
 
       default:
-        throw new RuntimeException('2**2 > 4');
+        throw new RuntimeException('2**2 > 4'); // @codeCoverageIgnore
     }
   }
 
@@ -221,12 +207,12 @@ class CoreBabel implements Babel
         return Html::txt2Html($this->getTextReplaced($txtId, $replacePairs));
 
       case ($formatIsHtml===false && $valuesAreHtml===true):
-        $text = Nub::$nub->DL->abcBabelCoreTextGetText($txtId, $this->language['lan_id']);
+        $text = $this->nub->DL->abcBabelCoreTextGetText($txtId, $this->lanId);
 
         return strtr(Html::txt2Html($text), $replacePairs);
 
       case ($formatIsHtml===true && $valuesAreHtml===false):
-        $text = Nub::$nub->DL->abcBabelCoreTextGetText($txtId, $this->language['lan_id']);
+        $text = $this->nub->DL->abcBabelCoreTextGetText($txtId, $this->lanId);
 
         $tmp = [];
         foreach ($replacePairs as $key => $value)
@@ -240,7 +226,7 @@ class CoreBabel implements Babel
         return $this->getTextReplaced($txtId, $replacePairs);
 
       default:
-        throw new RuntimeException('2**2 > 4');
+        throw new RuntimeException('2**2 > 4'); // @codeCoverageIgnore
     }
   }
 
@@ -287,21 +273,7 @@ class CoreBabel implements Babel
    */
   public function getInternalLanguageMap(): array
   {
-    return Nub::$nub->DL->abcBabelCoreInternalCodeMap();
-  }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  /**
-   * Returns the ID of the language.
-   *
-   * @return int
-   *
-   * @since 1.0.0
-   * @api
-   */
-  public function getLanId(): int
-  {
-    return $this->language['lan_id'];
+    return $this->nub->DL->abcBabelCoreInternalCodeMap();
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -347,7 +319,7 @@ class CoreBabel implements Babel
    */
   public function getText(int $txtId): string
   {
-    return Nub::$nub->DL->abcBabelCoreTextGetText($txtId, $this->language['lan_id']);
+    return $this->nub->DL->abcBabelCoreTextGetText($txtId, $this->lanId);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -365,7 +337,7 @@ class CoreBabel implements Babel
    */
   public function getTextFormatted(int $txtId, array $args): string
   {
-    $text = Nub::$nub->DL->abcBabelCoreTextGetText($txtId, $this->language['lan_id']);
+    $text = $this->nub->DL->abcBabelCoreTextGetText($txtId, $this->lanId);
 
     return vsprintf($text, $args);
   }
@@ -385,7 +357,7 @@ class CoreBabel implements Babel
    */
   public function getTextReplaced(int $txtId, array $replacePairs): string
   {
-    $text = Nub::$nub->DL->abcBabelCoreTextGetText($txtId, $this->language['lan_id']);
+    $text = $this->nub->DL->abcBabelCoreTextGetText($txtId, $this->lanId);
 
     return strtr($text, $replacePairs);
   }
@@ -403,7 +375,7 @@ class CoreBabel implements Babel
    */
   public function getWord(int $wrdId): string
   {
-    return Nub::$nub->DL->abcBabelCoreWordGetWord($wrdId, $this->language['lan_id']);
+    return $this->nub->DL->abcBabelCoreWordGetWord($wrdId, $this->lanId);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -419,6 +391,7 @@ class CoreBabel implements Babel
   {
     array_pop($this->stack);
     $this->language = $this->stack[count($this->stack) - 1];
+    $this->lanId    = $this->language['lan_id'];
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -434,7 +407,8 @@ class CoreBabel implements Babel
    */
   public function pushLanguage(int $lanId): void
   {
-    $this->language = Nub::$nub->DL->abcBabelCoreLanguageGetDetails($lanId);
+    $this->language = $this->nub->DL->abcBabelCoreLanguageGetDetails($lanId);
+    $this->lanId    = $this->language['lan_id'];
     array_push($this->stack, $this->language);
   }
 
@@ -451,7 +425,8 @@ class CoreBabel implements Babel
    */
   public function setLanguage(int $lanId): void
   {
-    $this->language                               = Nub::$nub->DL->abcBabelCoreLanguageGetDetails($lanId);
+    $this->language                               = $this->nub->DL->abcBabelCoreLanguageGetDetails($lanId);
+    $this->lanId                                  = $this->language['lan_id'];
     $this->stack[max(0, count($this->stack) - 1)] = $this->language;
   }
 
