@@ -13,6 +13,7 @@ build:
 
   tests:
     before:
+      - export PLAISIO_CONFIG_DIR=test
       - ./bin/phing kernel
     override:
       - command: './bin/phing unit'
