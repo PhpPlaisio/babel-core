@@ -1,9 +1,10 @@
 /**
  * Selects all language codes as map from language code to language ID.
+ *
+ * @type map
  */
 create procedure abc_babel_core_internal_code_map()
 reads sql data
--- type: map
 begin
   select lan_code
   ,      lan_id

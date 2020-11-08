@@ -2,10 +2,11 @@
  * Selects the details of a language.
  *
  * @param p_lan_id The ID of the language.
+ *
+ * @type row1
  */
 create procedure abc_babel_core_language_get_details(in p_lan_id @abc_babel_language.lan_id%type@)
 reads sql data
--- type: row1
 begin
   select lan_id
   ,      lan_code
