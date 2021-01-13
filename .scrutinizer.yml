@@ -1,22 +1,38 @@
+filter:
+  dependency_paths:
+    - "vendor/"
+  excluded_paths:
+    - 'test/'
+
 build:
-  dependencies:
-    before:
-      - sudo locale-gen en_US
-      - sudo locale-gen en_US.utf8
-      - sudo locale-gen nl_NL
-      - sudo locale-gen nl_NL.utf8
-      - sudo locale-gen nl_BE
-      - sudo locale-gen nl_BE.utf8
-
   environment:
-    mysql: 5.7
+    php:
+      version: '7.4'
+      pecl_extensions:
+        - inotify
 
-  tests:
-    before:
-      - export PLAISIO_CONFIG_DIR=test
-      - ./bin/phing kernel
-    override:
-      - command: './bin/phing unit'
-        coverage:
-          file:   'test/coverage.xml'
-          format: 'php-clover'
+          dependencies:
+            before:
+
+  nodes:
+    analysis:
+      tests:
+        override:
+          - php-scrutinizer-run
+
+    coverage:
+      tests:
+        before:
+          - sudo locale-gen en_US
+          - sudo locale-gen en_US.utf8
+          - sudo locale-gen nl_NL
+          - sudo locale-gen nl_NL.utf8
+          - sudo locale-gen nl_BE
+          - sudo locale-gen nl_BE.utf8
+          - export PLAISIO_CONFIG_DIR=test
+          - ./bin/phing kernel
+        override:
+          - command: './bin/phing unit'
+            coverage:
+              file:   'test/coverage.xml'
+              format: 'php-clover'
