@@ -11,9 +11,6 @@ build:
       pecl_extensions:
         - inotify
 
-          dependencies:
-            before:
-
   nodes:
     analysis:
       tests:
