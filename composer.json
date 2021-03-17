@@ -20,7 +20,7 @@
     "phpunit/phpunit": "^9.5.0",
     "plaisio/console": "^2.4.8",
     "setbased/php-stratum": "^6.1.0",
-    "setbased/php-stratum-mysql": "^6.3.0"
+    "setbased/php-stratum-mysql": "^6.4.0"
   },
   "autoload": {
     "psr-4": {
