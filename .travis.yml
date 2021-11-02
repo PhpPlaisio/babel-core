@@ -9,6 +9,7 @@ addons:
   mariadb: '10.2'
 
 before_install:
+  - pecl install inotify
   - mysql --version
   - mysql -u root -e "set global binlog_format = 'row';"
   - mysql -u root -e "set global log_bin_trust_function_creators = 1;"
