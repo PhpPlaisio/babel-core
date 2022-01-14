@@ -19,14 +19,14 @@ class CoreBabel extends PlaisioObject implements Babel
    *
    * @var array
    */
-  private $language;
+  private array $language;
 
   /**
    * The stack with language details.
    *
    * @var array[]
    */
-  private $stack = [];
+  private array $stack = [];
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -189,8 +189,8 @@ class CoreBabel extends PlaisioObject implements Babel
    * @param bool  $formatIsHtml  If true the text is valid HTML code with special characters converted to HTML
    *                             entities. Otherwise, the text is plain text and special characters will be converted
    *                             to HTML entities.
-   * @param bool  $valuesAreHtml If true the replace values are valid HTML code with special characters converted to
-   *                             HTML entities. Otherwise, the replace values are plain text and special characters
+   * @param bool  $valuesAreHtml If true the replacement values are valid HTML code with special characters converted to
+   *                             HTML entities. Otherwise, the replacement values are plain text and special characters
    *                             will be converted to HTML entities.
    * @param array $replacePairs  The parameters for the format string.
    *
