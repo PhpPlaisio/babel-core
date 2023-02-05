@@ -2,9 +2,11 @@
 /.phpunit.result.cache
 /bin/
 /composer.lock
+/custom.task.properties
+/custom.type.properties
+/test/TestDataLayer.php
 /test/coverage.xml
 /test/etc/columns.txt
 /test/etc/routines.json
 /test/report/
-/test/TestDataLayer.php
 /vendor/

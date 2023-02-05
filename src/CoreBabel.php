@@ -61,9 +61,12 @@ class CoreBabel extends PlaisioObject implements Babel
    * @since 1.0.0
    * @api
    */
-  public function getFormattedDate(int $dateType, $date): string
+  public function getFormattedDate(int $dateType, mixed $date): string
   {
-    if ($date=='') return '';
+    if ($date==='' || $date===null)
+    {
+      return '';
+    }
 
     switch ($dateType)
     {
@@ -89,20 +92,31 @@ class CoreBabel extends PlaisioObject implements Babel
 
     $oldLocale = setlocale(LC_TIME, 0);
     $locale    = setlocale(LC_TIME, $this->language['lan_locale']);
-    if ($locale===false) throw new RuntimeException('Unable to set locate to %s', $this->language['lan_locale']);
+    if ($locale===false)
+    {
+      throw new RuntimeException('Unable to set locate to %s', $this->language['lan_locale']);
+    }
+
+    $formatter = new \IntlDateFormatter($locale,
+                                        \IntlDateFormatter::FULL,
+                                        \IntlDateFormatter::FULL,
+                                        null,
+                                        \IntlDateFormatter::GREGORIAN,
+                                        $format);
 
     switch (true)
     {
       case is_string($date):
-        $formatted = strftime($format, strtotime($date));
+        $object    = new \DateTimeImmutable($date);
+        $formatted = $formatter->format($object);
         break;
 
       case is_int($date):
-        $formatted = strftime($format, strtotime((string)$date));
+        $formatted = $formatter->format(strtotime((string)$date));
         break;
 
       case is_a($date, '\DateTimeInterface'):
-        $formatted = strftime($format, $date->getTimestamp());
+        $formatted = $formatter->format($date);
         break;
 
       default:
@@ -189,7 +203,7 @@ class CoreBabel extends PlaisioObject implements Babel
    * @param bool  $formatIsHtml  If true the text is valid HTML code with special characters converted to HTML
    *                             entities. Otherwise, the text is plain text and special characters will be converted
    *                             to HTML entities.
-   * @param bool  $valuesAreHtml If true the replacement values are valid HTML code with special characters converted to
+   * @param bool  $argsAreHtml   If true the replacement values are valid HTML code with special characters converted to
    *                             HTML entities. Otherwise, the replacement values are plain text and special characters
    *                             will be converted to HTML entities.
    * @param array $replacePairs  The parameters for the format string.
@@ -199,19 +213,19 @@ class CoreBabel extends PlaisioObject implements Babel
    * @since 1.0.0
    * @api
    */
-  public function getHtmlTextReplaced(int $txtId, bool $formatIsHtml, bool $valuesAreHtml, array $replacePairs): string
+  public function getHtmlTextReplaced(int $txtId, bool $formatIsHtml, bool $argsAreHtml, array $replacePairs): string
   {
     switch (true)
     {
-      case ($formatIsHtml===false && $valuesAreHtml===false):
+      case ($formatIsHtml===false && $argsAreHtml===false):
         return Html::txt2Html($this->getTextReplaced($txtId, $replacePairs));
 
-      case ($formatIsHtml===false && $valuesAreHtml===true):
+      case ($formatIsHtml===false && $argsAreHtml===true):
         $text = $this->nub->DL->abcBabelCoreTextGetText($txtId, $this->lanId);
 
         return strtr(Html::txt2Html($text), $replacePairs);
 
-      case ($formatIsHtml===true && $valuesAreHtml===false):
+      case ($formatIsHtml===true && $argsAreHtml===false):
         $text = $this->nub->DL->abcBabelCoreTextGetText($txtId, $this->lanId);
 
         $tmp = [];
@@ -222,7 +236,7 @@ class CoreBabel extends PlaisioObject implements Babel
 
         return strtr($text, $tmp);
 
-      case ($formatIsHtml===true && $valuesAreHtml===true):
+      case ($formatIsHtml===true && $argsAreHtml===true):
         return $this->getTextReplaced($txtId, $replacePairs);
 
       default:
@@ -348,7 +362,7 @@ class CoreBabel extends PlaisioObject implements Babel
    * [strtr](http://php.net/manual/en/function.strtr.php)).
    *
    * @param int   $txtId        The ID of the text.
-   * @param array $replacePairs The replace pairs.
+   * @param array $replacePairs The replacement pairs.
    *
    * @return string
    *
@@ -409,7 +423,7 @@ class CoreBabel extends PlaisioObject implements Babel
   {
     $this->language = $this->nub->DL->abcBabelCoreLanguageGetDetails($lanId);
     $this->lanId    = $this->language['lan_id'];
-    array_push($this->stack, $this->language);
+    $this->stack[]  = $this->language;
   }
 
   //--------------------------------------------------------------------------------------------------------------------

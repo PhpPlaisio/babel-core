@@ -15,10 +15,10 @@ values( 1
 ,       'en'
 ,       'en_US.utf8'
 ,       'ltr'
-,       '%A, %B %e, %Y'
-,       '%B %d, %Y'
-,       '%b %e, %Y'
-,       '%x'
+,       'EEEE, LLLL dd, y'
+,       'LLLL dd, y'
+,       'MMM dd, y'
+,       'MM/dd/y'
 ,       'LAN_ID_EN')
 ,     ( 2
 ,       2
@@ -26,10 +26,10 @@ values( 1
 ,       'nl'
 ,       'nl_NL.utf8'
 ,       'ltr'
-,       '%A %e %B %Y'
-,       '%d %B %Y'
-,       '%e %b %Y'
-,       '%d-%m-%Y'
+,       'EEEE dd LLLL y'
+,       'dd LLLL y'
+,       'dd MMM y'
+,       'dd-MM-y'
 ,       'LAN_ID_NL')
 ,     ( 3
 ,       3
@@ -37,10 +37,10 @@ values( 1
 ,       'ru'
 ,       'ru_RU.utf8'
 ,       'ltr'
-,       '%A %e %B %Y'
-,       '%d %B %Y'
-,       '%e %b %Y'
-,       '%d-%m-%Y'
+,       'EEEE dd LLLL y'
+,       'dd LLLL y'
+,       'dd MMM y'
+,       'dd-MM-y'
 ,       'LAN_ID_RU')
 ,     ( 4
 ,       2
@@ -48,10 +48,10 @@ values( 1
 ,       'nl'
 ,       'nl_BE.utf8'
 ,       'ltr'
-,       '%A %e %B %Y'
-,       '%d %B %Y'
-,       '%e %b %Y'
-,       '%d-%m-%Y'
+,       'EEEE dd LLLL y'
+,       'dd LLLL y'
+,       'dd MMM y'
+,       'dd-MM-y'
 ,       'LAN_ID_NL_BE')
 ;
 

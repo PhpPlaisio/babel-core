@@ -4,9 +4,8 @@ declare(strict_types=1);
 namespace Plaisio\Babel\Test;
 
 use PHPUnit\Framework\TestCase;
-use Plaisio\Babel\CoreBabel;
+use Plaisio\Babel\Babel;
 use Plaisio\C;
-use Plaisio\PlaisioKernel;
 
 /**
  * Test cases for class CoreBabel.
@@ -17,9 +16,9 @@ class CoreBabelTest extends TestCase
   /**
    * Our concrete instance of Kernel.
    *
-   * @var PlaisioKernel
+   * @var TestKernel
    */
-  private static $nub;
+  private static TestKernel $nub;
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
@@ -38,16 +37,16 @@ class CoreBabelTest extends TestCase
    */
   public function testGetFormattedDate1a(): void
   {
-    $formatted = self::$nub->babel->getFormattedDate(CoreBabel::FORMAT_FULL, '1966-04-10');
+    $formatted = self::$nub->babel->getFormattedDate(Babel::FORMAT_FULL, '1966-04-10');
     self::assertSame('Sunday, April 10, 1966', $formatted, 'full');
 
-    $formatted = self::$nub->babel->getFormattedDate(CoreBabel::FORMAT_LONG, '1966-04-10');
+    $formatted = self::$nub->babel->getFormattedDate(Babel::FORMAT_LONG, '1966-04-10');
     self::assertSame('April 10, 1966', $formatted, 'long');
 
-    $formatted = self::$nub->babel->getFormattedDate(CoreBabel::FORMAT_MEDIUM, '1966-04-10');
+    $formatted = self::$nub->babel->getFormattedDate(Babel::FORMAT_MEDIUM, '1966-04-10');
     self::assertSame('Apr 10, 1966', $formatted, 'medium');
 
-    $formatted = self::$nub->babel->getFormattedDate(CoreBabel::FORMAT_SHORT, '1966-04-10');
+    $formatted = self::$nub->babel->getFormattedDate(Babel::FORMAT_SHORT, '1966-04-10');
     self::assertSame('04/10/1966', $formatted, 'short');
   }
 
@@ -57,16 +56,16 @@ class CoreBabelTest extends TestCase
    */
   public function testGetFormattedDate1b(): void
   {
-    $formatted = self::$nub->babel->getFormattedDate(CoreBabel::FORMAT_FULL, new \DateTime('1966-04-10'));
+    $formatted = self::$nub->babel->getFormattedDate(Babel::FORMAT_FULL, new \DateTime('1966-04-10'));
     self::assertSame('Sunday, April 10, 1966', $formatted, 'full');
 
-    $formatted = self::$nub->babel->getFormattedDate(CoreBabel::FORMAT_LONG, new \DateTimeImmutable('1966-04-10'));
+    $formatted = self::$nub->babel->getFormattedDate(Babel::FORMAT_LONG, new \DateTimeImmutable('1966-04-10'));
     self::assertSame('April 10, 1966', $formatted, 'long');
 
-    $formatted = self::$nub->babel->getFormattedDate(CoreBabel::FORMAT_MEDIUM, new \DateTime('1966-04-10'));
+    $formatted = self::$nub->babel->getFormattedDate(Babel::FORMAT_MEDIUM, new \DateTime('1966-04-10'));
     self::assertSame('Apr 10, 1966', $formatted, 'medium');
 
-    $formatted = self::$nub->babel->getFormattedDate(CoreBabel::FORMAT_SHORT, new \DateTimeImmutable('1966-04-10'));
+    $formatted = self::$nub->babel->getFormattedDate(Babel::FORMAT_SHORT, new \DateTimeImmutable('1966-04-10'));
     self::assertSame('04/10/1966', $formatted, 'short');
   }
 
@@ -76,16 +75,16 @@ class CoreBabelTest extends TestCase
    */
   public function testGetFormattedDate1c(): void
   {
-    $formatted = self::$nub->babel->getFormattedDate(CoreBabel::FORMAT_FULL, 19660410);
+    $formatted = self::$nub->babel->getFormattedDate(Babel::FORMAT_FULL, 19660410);
     self::assertSame('Sunday, April 10, 1966', $formatted, 'full');
 
-    $formatted = self::$nub->babel->getFormattedDate(CoreBabel::FORMAT_LONG, 19660410);
+    $formatted = self::$nub->babel->getFormattedDate(Babel::FORMAT_LONG, 19660410);
     self::assertSame('April 10, 1966', $formatted, 'long');
 
-    $formatted = self::$nub->babel->getFormattedDate(CoreBabel::FORMAT_MEDIUM, 19660410);
+    $formatted = self::$nub->babel->getFormattedDate(Babel::FORMAT_MEDIUM, 19660410);
     self::assertSame('Apr 10, 1966', $formatted, 'medium');
 
-    $formatted = self::$nub->babel->getFormattedDate(CoreBabel::FORMAT_SHORT, 19660410);
+    $formatted = self::$nub->babel->getFormattedDate(Babel::FORMAT_SHORT, 19660410);
     self::assertSame('04/10/1966', $formatted, 'short');
   }
 
@@ -95,10 +94,10 @@ class CoreBabelTest extends TestCase
    */
   public function testGetFormattedDate1d(): void
   {
-    $formatted = self::$nub->babel->getFormattedDate(CoreBabel::FORMAT_FULL, '');
+    $formatted = self::$nub->babel->getFormattedDate(Babel::FORMAT_FULL, '');
     self::assertSame('', $formatted, 'empty');
 
-    $formatted = self::$nub->babel->getFormattedDate(CoreBabel::FORMAT_FULL, null);
+    $formatted = self::$nub->babel->getFormattedDate(Babel::FORMAT_FULL, null);
     self::assertSame('', $formatted, 'null');
   }
 
@@ -110,16 +109,16 @@ class CoreBabelTest extends TestCase
   {
     self::$nub->babel->pushLanguage(C::LAN_ID_NL);
 
-    $formatted = self::$nub->babel->getFormattedDate(CoreBabel::FORMAT_FULL, '1966-04-10');
+    $formatted = self::$nub->babel->getFormattedDate(Babel::FORMAT_FULL, '1966-04-10');
     self::assertSame('zondag 10 april 1966', $formatted, 'full');
 
-    $formatted = self::$nub->babel->getFormattedDate(CoreBabel::FORMAT_LONG, '1966-04-10');
+    $formatted = self::$nub->babel->getFormattedDate(Babel::FORMAT_LONG, '1966-04-10');
     self::assertSame('10 april 1966', $formatted, 'long');
 
-    $formatted = self::$nub->babel->getFormattedDate(CoreBabel::FORMAT_MEDIUM, '1966-04-10');
-    self::assertSame('10 apr 1966', $formatted, 'medium');
+    $formatted = self::$nub->babel->getFormattedDate(Babel::FORMAT_MEDIUM, '1966-04-10');
+    self::assertSame('10 apr. 1966', $formatted, 'medium');
 
-    $formatted = self::$nub->babel->getFormattedDate(CoreBabel::FORMAT_SHORT, '1966-04-10');
+    $formatted = self::$nub->babel->getFormattedDate(Babel::FORMAT_SHORT, '1966-04-10');
     self::assertSame('10-04-1966', $formatted, 'short');
 
     self::$nub->babel->popLanguage();
@@ -133,16 +132,16 @@ class CoreBabelTest extends TestCase
   {
     self::$nub->babel->pushLanguage(C::LAN_ID_NL);
 
-    $formatted = self::$nub->babel->getFormattedDate(CoreBabel::FORMAT_FULL, new \DateTimeImmutable('1966-04-10'));
+    $formatted = self::$nub->babel->getFormattedDate(Babel::FORMAT_FULL, new \DateTimeImmutable('1966-04-10'));
     self::assertSame('zondag 10 april 1966', $formatted, 'full');
 
-    $formatted = self::$nub->babel->getFormattedDate(CoreBabel::FORMAT_LONG, new \DateTime('1966-04-10'));
+    $formatted = self::$nub->babel->getFormattedDate(Babel::FORMAT_LONG, new \DateTime('1966-04-10'));
     self::assertSame('10 april 1966', $formatted, 'long');
 
-    $formatted = self::$nub->babel->getFormattedDate(CoreBabel::FORMAT_MEDIUM, new \DateTimeImmutable('1966-04-10'));
-    self::assertSame('10 apr 1966', $formatted, 'medium');
+    $formatted = self::$nub->babel->getFormattedDate(Babel::FORMAT_MEDIUM, new \DateTimeImmutable('1966-04-10'));
+    self::assertSame('10 apr. 1966', $formatted, 'medium');
 
-    $formatted = self::$nub->babel->getFormattedDate(CoreBabel::FORMAT_SHORT, new \DateTime('1966-04-10'));
+    $formatted = self::$nub->babel->getFormattedDate(Babel::FORMAT_SHORT, new \DateTime('1966-04-10'));
     self::assertSame('10-04-1966', $formatted, 'short');
 
     self::$nub->babel->popLanguage();
@@ -156,16 +155,16 @@ class CoreBabelTest extends TestCase
   {
     self::$nub->babel->pushLanguage(C::LAN_ID_NL);
 
-    $formatted = self::$nub->babel->getFormattedDate(CoreBabel::FORMAT_FULL, 19660410);
+    $formatted = self::$nub->babel->getFormattedDate(Babel::FORMAT_FULL, 19660410);
     self::assertSame('zondag 10 april 1966', $formatted, 'full');
 
-    $formatted = self::$nub->babel->getFormattedDate(CoreBabel::FORMAT_LONG, 19660410);
+    $formatted = self::$nub->babel->getFormattedDate(Babel::FORMAT_LONG, 19660410);
     self::assertSame('10 april 1966', $formatted, 'long');
 
-    $formatted = self::$nub->babel->getFormattedDate(CoreBabel::FORMAT_MEDIUM, 19660410);
-    self::assertSame('10 apr 1966', $formatted, 'medium');
+    $formatted = self::$nub->babel->getFormattedDate(Babel::FORMAT_MEDIUM, 19660410);
+    self::assertSame('10 apr. 1966', $formatted, 'medium');
 
-    $formatted = self::$nub->babel->getFormattedDate(CoreBabel::FORMAT_SHORT, 19660410);
+    $formatted = self::$nub->babel->getFormattedDate(Babel::FORMAT_SHORT, 19660410);
     self::assertSame('10-04-1966', $formatted, 'short');
 
     self::$nub->babel->popLanguage();
