@@ -32,7 +32,7 @@ class TestKernel extends PlaisioKernel
    */
   protected function getDL(): Object
   {
-    $connector = new MySqlDefaultConnector('localhost', 'test', 'test', 'test');
+    $connector = new MySqlDefaultConnector('127.0.0.1', 'test', 'test', 'test');
 
     return new TestDataLayer($connector);
   }
