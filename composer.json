@@ -12,7 +12,7 @@
     "ext-intl": "*",
     "plaisio/babel": "^2.1.0",
     "plaisio/helper-html": "^4.1.0",
-    "plaisio/kernel": "^3.2.0",
+    "plaisio/kernel": "^3.2.1",
     "setbased/exception": "^2.3.0"
   },
   "minimum-stability": "dev",
