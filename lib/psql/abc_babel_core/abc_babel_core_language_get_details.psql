@@ -5,19 +5,21 @@
  *
  * @type row1
  */
-create procedure abc_babel_core_language_get_details(in p_lan_id @abc_babel_language.lan_id%type@)
-reads sql data
+create procedure abc_babel_core_language_get_details
+(
+  in p_lan_id tinyint(3) unsigned -- type: ABC_BABEL_LANGUAGE.lan_id
+)
+  reads sql data
 begin
   select lan_id
-  ,      lan_code
-  ,      lan_lang
-  ,      lan_locale
-  ,      lan_dir
-  ,      lan_date_format_full
-  ,      lan_date_format_long
-  ,      lan_date_format_medium
-  ,      lan_date_format_short
-  from   ABC_BABEL_LANGUAGE
-  where  lan_id = p_lan_id
-  ;
+       , lan_code
+       , lan_lang
+       , lan_locale
+       , lan_dir
+       , lan_date_format_full
+       , lan_date_format_long
+       , lan_date_format_medium
+       , lan_date_format_short
+  from ABC_BABEL_LANGUAGE
+  where lan_id = p_lan_id;
 end

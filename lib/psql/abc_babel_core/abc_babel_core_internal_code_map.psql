@@ -3,11 +3,10 @@
  *
  * @type map
  */
-create procedure abc_babel_core_internal_code_map()
-reads sql data
+create procedure abc_babel_core_internal_code_map ()
+  reads sql data
 begin
   select lan_code
-  ,      lan_id
-  from   ABC_BABEL_LANGUAGE
-  ;
+       , lan_id
+  from ABC_BABEL_LANGUAGE;
 end
