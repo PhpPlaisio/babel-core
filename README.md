@@ -22,7 +22,7 @@
 </td>
 <td>
 <a href="https://github.com/PhpPlaisio/babel-core/actions/workflows/unit.yml"><img src="https://github.com/PhpPlaisio/babel-core/actions/workflows/unit.yml/badge.svg" alt="Build Status"/></a><br/>
-<a href="https://scrutinizer-ci.com/g/PhpPlaisio/babel-core/?branch=master"><img src="https://scrutinizer-ci.com/g/PhpPlaisio/babel-core/badges/coverage.png?b=master" alt="Code Coverage"/></a>
+<a href="https://codecov.io/gh/PhpPlaisio/babel-core"><img src="https://codecov.io/gh/PhpPlaisio/form/branch/master/graph/babel-core.svg" alt="Code Coverage"/></a>
 </td>
 </tr>
 </tbody>
